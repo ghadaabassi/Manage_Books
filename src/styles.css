@@ -47,6 +47,10 @@ Version: 1.1
   --secondary-font: "Playfair Display", Georgia, serif;
 }
 
+*{
+  background-color: white !important;;
+}
+
 /* Bootstrap variables */
 :root,
 [data-bs-theme="light"] {
