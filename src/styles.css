@@ -34,7 +34,7 @@ Version: 1.1
   --accent-color: #c5a992;
   --secondary-color: #c5a992;
   --dark-color: #2f2f2f;
-  --light-color: #f3f2ec;
+  --light-color: white !important;
   --body-text-color: #757575;
   --light-text-color: #afafaf;
   --dark-text-color: #2f2f2f;
@@ -42,13 +42,9 @@ Version: 1.1
 
 /* Fonts */
 :root {
-  --body-font: "Raleway", sans-serif;
+  --body-font: "Prata", Georgia, serif;
   --heading-font: "Prata", Georgia, serif;
   --secondary-font: "Playfair Display", Georgia, serif;
-}
-
-*{
-  background-color: white !important;;
 }
 
 /* Bootstrap variables */
@@ -1808,7 +1804,6 @@ img.post-image {
 
 /* - Main Navigation
       ------------------------------------------------------------- */
-
 
 /*----- Cient-holder Section
       --------------------------------------------------------------*/
