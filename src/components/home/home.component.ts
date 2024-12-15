@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { SliderComponent } from '../slider/slider.component';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, SliderComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })

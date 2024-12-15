@@ -1,0 +1,25 @@
+<div class="main-slider">
+  <div
+    style="display: flex; gap: 20px; align-items: center;"
+    *ngFor="let slide of slides"
+  >
+    <div style="flex: 1; display: flex; flex-direction: row; gap: 20px; align-items: center;">
+      
+      <div style="flex: 1; display: flex; flex-direction: column;">
+        <h1>{{ slide.title }}</h1>
+        <p>{{ slide.description }}</p>
+        <div>
+          <a href="#" class="btn btn-outline-accent btn-accent-arrow">
+            Read More<i class="icon icon-ns-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+      
+      <img
+        style="max-width: 100%; height: auto; object-fit: cover;"
+        [src]="slide.image"
+        alt="banner"
+      />
+    </div>
+  </div>
+</div>
