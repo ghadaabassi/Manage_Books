@@ -1,0 +1,37 @@
+<div>
+  <h1>Your Book Collection</h1>
+
+  <!-- Loop through the list of books -->
+  <ul>
+    <li *ngFor="let book of books">
+      <div class="book-item">
+        <h3>{{ book.title }}</h3>
+        <p>{{ book.author }}</p>
+
+        <!-- Button to get similar books -->
+        <button (click)="fetchSimilarBooks(book)" [disabled]="loading[book.id]">
+          <!-- Show loading spinner when fetching similar books -->
+          <span *ngIf="loading[book.id]">Loading...</span>
+          <span *ngIf="!loading[book.id]">Get Similar Books</span>
+        </button>
+
+        <!-- Show similar books if available -->
+        <ul *ngIf="similarBooks[book.id]">
+          <li *ngFor="let similarBook of similarBooks[book.id]">
+            <h4>{{ similarBook.title }}</h4>
+            <p>{{ similarBook.authors?.join(", ") }}</p>
+            <a [href]="similarBook.previewLink" target="_blank">Read More</a>
+          </li>
+        </ul>
+
+        <!-- Show error message if similar books are not fetched -->
+        <p
+          *ngIf="loading[book.id] === false && !similarBooks[book.id]"
+          class="error-message"
+        >
+          Sorry, we couldn't find similar books for "{{ book.title }}".
+        </p>
+      </div>
+    </li>
+  </ul>
+</div>

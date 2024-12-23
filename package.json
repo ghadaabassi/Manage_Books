@@ -20,6 +20,8 @@
     "@angular/router": "^19.0.0",
     "@types/three": "^0.171.0",
     "jquery": "^3.7.1",
+    "keycloak-angular": "^19.0.1",
+    "keycloak-js": "^26.0.7",
     "manage-books": "file:",
     "rxjs": "~7.8.0",
     "slick-carousel": "^1.8.1",
