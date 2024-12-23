@@ -1,1 +1,33 @@
-<p>free-books works!</p>
+<div class="container mt-5">
+  <h1 class="display-4 text-center text-dark mb-4">
+    "Reading is to the mind what exercise is to the body." — Joseph Addison
+  </h1>
+  <div class="d-flex align-items-start">
+    <div
+      class="card text-white bg-dark shadow-lg me-4"
+      style="max-width: 25rem; flex: 1"
+    >
+      <div class="card-header text-center">Our Free E-Books Collection</div>
+      <div class="card-body">
+        <h4 class="card-title text-center">Type your ISBN below</h4>
+        <input
+          type="text"
+          class="form-control isbn mb-3"
+          [(ngModel)]="isbn"
+          placeholder="Enter your ISBN"
+        />
+        <button class="btn btn-primary w-100 mb-2" (click)="initialize()">
+          Start Reading
+        </button>
+        <button class="btn btn-light w-100" (click)="startAutoTurn()">
+          Auto-turn
+        </button>
+      </div>
+    </div>
+
+    <div
+      id="viewerCanvas"
+      style="flex: 2; height: 800px; border-radius: 8px"
+    ></div>
+  </div>
+</div>
