@@ -7,7 +7,10 @@ interface VolumeInfo {
   title: string;
   authors?: string[];
   previewLink?: string;
-  imageLink?: string;
+  imageLinks?: {
+    smallThumbnail?: string;
+    thumbnail?: string;
+  };
 }
 
 interface Book {
@@ -45,6 +48,7 @@ export class BookRecommenderComponent {
 
     this.recommenderService.getRecommendations(book.title).subscribe(
       (data: ApiResponse) => {
+        console.log('Dataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa: ', data);
         this.similarBooks[book.id] = data.items.map((item) => item.volumeInfo);
         this.loading[book.id] = false;
       },
