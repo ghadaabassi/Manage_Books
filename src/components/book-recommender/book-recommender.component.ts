@@ -7,6 +7,7 @@ interface VolumeInfo {
   title: string;
   authors?: string[];
   previewLink?: string;
+  imageLink?: string;
 }
 
 interface Book {
