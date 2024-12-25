@@ -13,6 +13,6 @@ export const routes: Routes = [
   { path: 'free', component: FreeBooksComponent },
   { path: 'recommender', component: BookRecommenderComponent },
   { path: 'aboutUs', component: AboutUsComponent },
-  { path: 'SignIn', component: SignInComponent },
-  { path: 'SignUp', component: SignUpComponent },
+  { path: 'signIn', component: SignInComponent },
+  { path: 'signUp', component: SignUpComponent },
 ];
