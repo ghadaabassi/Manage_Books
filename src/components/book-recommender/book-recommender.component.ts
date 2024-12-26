@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RecommendationService } from '../../services/recommender.service';
+import { RecommendationService } from '../../services/recomd/recommender.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
