@@ -31,7 +31,6 @@
       <div class="input-field">
         <input
           type="password"
-          [(ngModel)]="user.confirmPassword"
           name="confirmPassword"
           required
         />
@@ -45,7 +44,7 @@
         </label>
       </div>
 
-      <button type="submit" [disabled]="!isFormValid()">Sign Up</button>
+      <button type="submit">Sign Up</button>
 
       <div class="login">
         <p>Already have an account? <a href="/login">Log In</a></p>

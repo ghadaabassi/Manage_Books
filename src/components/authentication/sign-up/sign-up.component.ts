@@ -1,47 +1,32 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth/auth.service';
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-sign-up',
-  imports: [CommonModule, FormsModule],
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.css'],
+  imports: [CommonModule, FormsModule],
 })
 export class SignUpComponent {
-  user = { email: '', password: '', username: '', confirmPassword: '' };
+  user = { email: '', password: '', username: '' };
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private backendlessService: AuthService,
+    private router: Router
+  ) {}
 
   signUp() {
-    if (this.user.password !== this.user.confirmPassword) {
-      console.error('Passwords do not match');
-      return;
-    }
-
-    this.authService.signUp(this.user).subscribe(
+    this.backendlessService.signUp(this.user).then(
       (response) => {
-        this.authService.setSession(response);
-        this.router.navigate(['/model']).then(() => {
-          setTimeout(() => {
-            this.router.navigate(['/aboutUs']);
-          }, 7000);
-        });
+        console.log('User created successfully:', response);
+        this.router.navigate(['/model']);
       },
       (error) => {
-        console.error('Sign-up error:', error);
+        console.error('Error during sign up:', error);
       }
-    );
-  }
-
-  isFormValid(): boolean {
-    return (
-      this.user.password === this.user.confirmPassword &&
-      this.user.username?.trim().length > 0 &&
-      this.user.email?.trim().length > 0 &&
-      this.user.password?.trim().length > 0
     );
   }
 }

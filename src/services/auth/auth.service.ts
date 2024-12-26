@@ -1,56 +1,74 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-
-interface User {
-  email: string;
-  password: string;
-}
-
-interface AuthResponse {
-  user: {
-    email: string;
-    token: string;
-  };
-}
+import { environment } from '../../environment/environment';
+import Backendless from 'backendless';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'https://api.realworld.io/api/users';
-  private currentUserSubject: BehaviorSubject<any> = new BehaviorSubject<any>(
-    null
-  );
-  public currentUser: Observable<any> = this.currentUserSubject.asObservable();
 
-  constructor(private http: HttpClient) {}
+  private apiKey = environment.backendless.API_KEY;
+  private apiId = environment.backendless.APP_ID;
 
-  signUp(user: User): Observable<AuthResponse> {
-    return this.http
-      .post<AuthResponse>(`${this.apiUrl}/`, { user })
-      .pipe(catchError(this.handleError));
+  constructor() {
+    Backendless.initApp(this.apiId, this.apiKey);
   }
 
-  signIn(user: User): Observable<AuthResponse> {
-    return this.http
-      .post<AuthResponse>(`${this.apiUrl}/login`, { user })
-      .pipe(catchError(this.handleError));
+  /**
+   * Register a new user
+   * @param userData User registration data
+   * @returns A Promise containing the result of the registration
+   */
+  signUp(userData: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      Backendless.UserService.register(userData)
+        .then((user) => resolve(user))
+        .catch((error) => reject(this.handleError(error)));
+    });
   }
 
-  logout(): void {
-    localStorage.removeItem('currentUser');
-    this.currentUserSubject.next(null);
+  /**
+   * Sign in a user
+   * @param userData User credentials (email and password)
+   * @returns A Promise containing the user on successful login
+   */
+  signIn(userData: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      Backendless.UserService.login(userData.email, userData.password)
+        .then((user) => resolve(user))
+        .catch((error) => reject(this.handleError(error)));
+    });
   }
 
-  setSession(authResponse: AuthResponse): void {
-    localStorage.setItem('currentUser', JSON.stringify(authResponse));
-    this.currentUserSubject.next(authResponse.user);
+  /**
+   * Sign out the current user
+   * @returns A Promise to log out the user
+   */
+  signOut(): Promise<void> {
+    return new Promise((resolve, reject) => {
+      Backendless.UserService.logout()
+        .then(() => resolve())
+        .catch((error) => reject(this.handleError(error)));
+    });
   }
 
-  private handleError(error: any): Observable<never> {
-    console.error('API error', error);
-    throw error;
+  /**
+   * Get the current logged-in user
+   * @returns The current user or null if no user is logged in
+   */
+  getCurrentUser(): any {
+    return Backendless.UserService.getCurrentUser();
+  }
+
+  /**
+   * Handle errors from Backendless API
+   * @param error The error object returned from Backendless API
+   * @returns A human-readable error message
+   */
+  private handleError(error: any): string {
+    if (error && error.message) {
+      return error.message;
+    }
+    return 'An unknown error occurred.';
   }
 }
