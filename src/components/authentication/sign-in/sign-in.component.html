@@ -1,25 +1,40 @@
 <body>
   <div class="wrapper">
-    <form action="#">
+    <form (ngSubmit)="signIn()" #signInForm="ngForm">
       <h2>Login</h2>
+
       <div class="input-field">
-        <input type="text" required />
-        <label>Enter your email</label>
+        <input
+          type="email"
+          [(ngModel)]="user.email"
+          name="email"
+          required
+          placeholder="Enter your email"
+        />
       </div>
+
       <div class="input-field">
-        <input type="password" required />
-        <label>Enter your password</label>
+        <input
+          type="password"
+          [(ngModel)]="user.password"
+          name="password"
+          required
+          placeholder="Enter your password"
+        />
       </div>
+
       <div class="forget">
         <label for="remember">
-          <input type="checkbox" id="remember" />
+          <input type="checkbox" [(ngModel)]="rememberMe" name="rememberMe" />
           <p>Remember me</p>
         </label>
-        <a href="#">Forgot password?</a>
+        <a routerLink="/forgot-password">Forgot password?</a>
       </div>
-      <button type="submit">Log In</button>
+
+      <button type="submit" [disabled]="!signInForm.form.valid">Log In</button>
+
       <div class="register">
-        <p>Don't have an account? <a href="#">Register</a></p>
+        <p>Don't have an account? <a routerLink="/register">Register</a></p>
       </div>
     </form>
   </div>

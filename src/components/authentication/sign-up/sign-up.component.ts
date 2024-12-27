@@ -22,7 +22,11 @@ export class SignUpComponent {
     this.backendlessService.signUp(this.user).then(
       (response) => {
         console.log('User created successfully:', response);
-        this.router.navigate(['/model']);
+        this.router.navigate(['/model']).then(() => {
+          setTimeout(() => {
+            this.router.navigate(['/free']);
+          }, 5000);
+        });
       },
       (error) => {
         console.error('Error during sign up:', error);
