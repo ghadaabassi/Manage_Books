@@ -1,0 +1,13 @@
+services:
+  frontend:
+    build:
+      dockerfile: Dockerfile
+    container_name: frontend
+    ports:
+      - "80:80"
+    networks:
+      - angular-network
+
+networks:
+  angular-network:
+    driver: bridge
