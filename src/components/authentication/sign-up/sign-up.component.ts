@@ -13,24 +13,18 @@ import { FormsModule } from '@angular/forms';
 export class SignUpComponent {
   user = { email: '', password: '', username: '' };
 
-  constructor(
-    private backendlessService: AuthService,
-    private router: Router
-  ) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
-  signUp() {
-    this.backendlessService.signUp(this.user).then(
-      (response) => {
-        console.log('User created successfully:', response);
-        this.router.navigate(['/model']).then(() => {
-          setTimeout(() => {
-            this.router.navigate(['/free']);
-          }, 5000);
-        });
-      },
-      (error) => {
-        console.error('Error during sign up:', error);
-      }
-    );
+  async signUp() {
+    try {
+      const response = await this.authService.signUp(this.user);
+      console.log('User created successfully:', response);
+      this.router.navigate(['/model']).then(() => {
+        setTimeout(() => this.router.navigate(['/free']), 5000);
+      });
+    } catch (error) {
+      console.error('Error during sign up:', error);
+      alert('Sign-up failed. Please try again.');
+    }
   }
 }
