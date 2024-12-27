@@ -1,0 +1,145 @@
+/* General Reset */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Header Wrap */
+#header-wrap {
+  border-bottom: 1px solid #ddd;
+}
+
+/* Top Content */
+.top-content {
+  background-color: #f8f8f8;
+  padding: 10px 0;
+}
+.top-content .row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.social-links {
+  display: flex;
+  gap: 15px;
+}
+.social-links a {
+  color: #333;
+  font-size: 1.2rem;
+}
+.user-options {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+.user-options a {
+  font-weight: bold;
+  color: #555;
+}
+.search-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.search-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.search-box {
+  display: none;
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background: white;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+.search-box input {
+  width: 200px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+.search-toggle[aria-expanded="true"] + .search-box {
+  display: block;
+}
+
+/* Header */
+#header {
+  padding: 10px 0;
+}
+#header .row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.main-logo img {
+  max-width: 150px;
+  height: auto;
+}
+
+/* Navbar */
+#navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.menu-list {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+.menu-list .menu-item a {
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 5px 10px;
+  color: #333;
+  text-transform: uppercase;
+}
+.menu-item.has-sub ul {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.menu-item.has-sub:hover ul {
+  display: block;
+}
+.menu-item ul li {
+  padding: 5px 10px;
+  white-space: nowrap;
+}
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
+.hamburger .bar {
+  width: 25px;
+  height: 3px;
+  background: #333;
+}
+@media (max-width: 768px) {
+  .menu-list {
+    display: none;
+    flex-direction: column;
+  }
+  .hamburger {
+    display: flex;
+  }
+  .menu-list.active {
+    display: flex;
+  }
+}
