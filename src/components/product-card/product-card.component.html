@@ -1,0 +1,22 @@
+<div class="col-md-3">
+  <div class="product-item">
+    <figure class="product-style">
+      <img [src]="product.image" [alt]="product.title" class="product-item" />
+      <button
+        type="button"
+        class="add-to-cart"
+        data-product-tile="add-to-cart"
+      >
+        Add to Cart
+      </button>
+    </figure>
+    <figcaption>
+      <h3>{{ product.title }}</h3>
+      <p *ngIf="product.author">{{ product.author }}</p>
+      <div class="item-price">
+        <span *ngIf="product.oldPrice" class="prev-price">\${{ product.oldPrice }}</span>
+        ${{ product.price }}
+      </div>
+    </figcaption>
+  </div>
+</div>
