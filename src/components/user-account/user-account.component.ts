@@ -1,17 +1,27 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-user-account',
   templateUrl: './user-account.component.html',
   styleUrls: ['./user-account.component.css'],
+  imports: [CommonModule, FormsModule],
 })
 export class UserAccountComponent {
   userData: any;
-  followersCount: number = 0;
-  profilePic: string = 'https://i.imgur.com/wvxPV9S.png';
-  username: string = 'Eleanor Pena';
+  username: string = '';
   userId: string = '';
+  profilePic: string = 'https://i.imgur.com/wvxPV9S.png';
+
+  isEditing: boolean = false;
+
+  updatedData = {
+    username: '',
+    email: '',
+    password: '',
+  };
 
   constructor(private authService: AuthService) {}
 
@@ -19,21 +29,46 @@ export class UserAccountComponent {
     this.loadUserData();
   }
 
-  async loadUserData(): Promise<void> {
-    try {
-      const currentUser = await this.authService.getCurrentUserData();
+  loadUserData(): void {
+    const currentUser = this.authService.getCurrentUserData();
 
-      if (currentUser) {
-        this.userData = currentUser;
-        this.username = currentUser.username || 'No username';
-        this.userId = currentUser.objectId || '';
-        this.profilePic = currentUser.profilePicture || this.profilePic;
-        this.followersCount = currentUser.followersCount || 0;
-      } else {
-        console.log('No user is logged in.');
-      }
+    if (currentUser) {
+      this.userData = currentUser;
+      this.username = currentUser.username || 'No username';
+      this.userId = currentUser.objectId;
+      this.updatedData.username = currentUser.username || '';
+      this.updatedData.email = currentUser.email || '';
+    } else {
+      console.log('No user is logged in.');
+    }
+  }
+
+  editProfile(): void {
+    this.isEditing = true;
+  }
+
+  cancelEdit(): void {
+    this.isEditing = false;
+    this.updatedData = {
+      username: this.userData.username,
+      email: this.userData.email,
+      password: '',
+    };
+  }
+
+  async saveChanges(): Promise<void> {
+    try {
+      const updatedUser = await this.authService.updateUserData(
+        this.updatedData
+      );
+
+      this.userData = updatedUser;
+      this.username = updatedUser.username || '';
+      this.isEditing = false;
+
+      console.log('User data updated:', updatedUser);
     } catch (error) {
-      console.error('Error loading user data: ', error);
+      console.error('Error updating user data:', error);
     }
   }
 }

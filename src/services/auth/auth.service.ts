@@ -96,7 +96,6 @@ export class AuthService {
 
           console.log('User Email: ', userData.email);
           console.log('Username: ', userData.username);
-          // console.log('User Status: ', userData.userStatus);
 
           return userData;
         } else {
@@ -129,5 +128,39 @@ export class AuthService {
    */
   private handleError(error: any): string {
     return error?.message || 'An unknown error occurred.';
+  }
+
+  async updateUserData(updatedData: {
+    username?: string;
+    email?: string;
+    password?: string;
+  }) {
+    const currentUser = await Backendless.UserService.getCurrentUser();
+
+    if (!currentUser) {
+      throw new Error('User not logged in');
+    }
+
+    try {
+      const user = currentUser as Backendless.User;
+      if (updatedData.username) {
+        user.username = updatedData.username;
+      }
+
+      if (updatedData.email) {
+        user.email = updatedData.email;
+      }
+
+      if (updatedData.password) {
+        user.password = updatedData.password;
+      }
+
+      const updatedUser = await Backendless.UserService.update(user);
+      console.log('User data updated:', updatedUser);
+      return updatedUser;
+    } catch (error) {
+      console.error('Error updating user data:', error);
+      throw error;
+    }
   }
 }
