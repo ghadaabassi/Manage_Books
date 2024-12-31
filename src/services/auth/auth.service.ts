@@ -65,6 +65,18 @@ export class AuthService {
     }
   }
 
+
+  isAuthenticated(): boolean {
+    const userData = localStorage.getItem('Backendless_6AC1BC39-DAB7-4AD5-9FDF-976D80128B7C');
+    if (userData) {
+      const parsedData = JSON.parse(userData);
+      return parsedData['user-token'] !== undefined;
+    }
+    return false;
+  }  
+
+
+
   /**
    * Sign out the current user
    * @returns A Promise to log out the user
@@ -75,14 +87,6 @@ export class AuthService {
     } catch (error) {
       throw this.handleError(error);
     }
-  }
-
-  /**
-   * Get the current logged-in user
-   * @returns The current user or null if no user is logged in
-   */
-  getCurrentUser(): any {
-    return Backendless.UserService.getCurrentUser();
   }
 
   /**
