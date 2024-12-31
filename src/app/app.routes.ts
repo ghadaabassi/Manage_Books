@@ -6,12 +6,18 @@ import { BookRecommenderComponent } from '../components/book-recommender/book-re
 import { AboutUsComponent } from '../components/about-us/about-us.component';
 import { SignInComponent } from '../components/authentication/sign-in/sign-in.component';
 import { SignUpComponent } from '../components/authentication/sign-up/sign-up.component';
+import { roleGuard } from '../guards/role.guard';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'model', component: ThreeDModelComponent },
   { path: 'free', component: FreeBooksComponent },
-  { path: 'recommender', component: BookRecommenderComponent },
+  {
+    path: 'recommender',
+    component: BookRecommenderComponent,
+    canActivate: [roleGuard],
+    data: { role: 'Reader' },
+  },
   { path: 'aboutUs', component: AboutUsComponent },
   { path: 'signIn', component: SignInComponent },
   { path: 'signup', component: SignUpComponent },
