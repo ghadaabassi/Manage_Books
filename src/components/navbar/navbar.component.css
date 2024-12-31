@@ -141,3 +141,18 @@ ul {
     display: flex;
   }
 }
+
+.sign-out-btn {
+  border-radius: 15px;
+  max-height: 50px;
+  margin: 8px;
+  margin-left: 25px;
+  color: var(--bs-primary);
+  background-color: white;
+  border: solid var(--bs-primary);
+}
+
+.sign-out-btn:hover {
+  color: white;
+  background-color: var(--bs-primary);
+}
