@@ -73,8 +73,18 @@ export class AuthService {
       return parsedData['user-token'] !== undefined;
     }
     return false;
-  }  
+  }
 
+
+  getUserRoles(): string[] {
+    const roles = localStorage.getItem('userRoles');
+    return roles ? JSON.parse(roles) : [];
+  }
+
+  hasRole(role: string): boolean {
+    const roles = this.getUserRoles();
+    return roles.includes(role);
+  }
 
 
   /**
