@@ -65,16 +65,16 @@ export class AuthService {
     }
   }
 
-
   isAuthenticated(): boolean {
-    const userData = localStorage.getItem('Backendless_6AC1BC39-DAB7-4AD5-9FDF-976D80128B7C');
+    const userData = localStorage.getItem(
+      'Backendless_6AC1BC39-DAB7-4AD5-9FDF-976D80128B7C'
+    );
     if (userData) {
       const parsedData = JSON.parse(userData);
       return parsedData['user-token'] !== undefined;
     }
     return false;
   }
-
 
   getUserRoles(): string[] {
     const roles = localStorage.getItem('userRoles');
@@ -86,6 +86,29 @@ export class AuthService {
     return roles.includes(role);
   }
 
+  getCurrentUserData(): any {
+    return Backendless.UserService.getCurrentUser()
+      .then((currentUser) => {
+        if (currentUser) {
+          const userData = currentUser;
+
+          console.log('Current User Data: ', userData);
+
+          console.log('User Email: ', userData.email);
+          console.log('Username: ', userData.username);
+          // console.log('User Status: ', userData.userStatus);
+
+          return userData;
+        } else {
+          console.log('No user is logged in.');
+          return null;
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching current user: ', error);
+        return null;
+      });
+  }
 
   /**
    * Sign out the current user
