@@ -51,6 +51,7 @@ export class AuthService {
       const user = await Backendless.UserService.login(
         userData.email,
         userData.password,
+        true
       );
 
       const roles = await Backendless.UserService.getUserRoles();
