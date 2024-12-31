@@ -14,7 +14,7 @@ export class NavbarComponent {
   isAuthenticated: boolean = false;
 
   ngOnInit(): void {
-    this.isAuthenticated = true;
+    this.isAuthenticated = this.authService.isAuthenticated();
   }
 
   async signOut() {
