@@ -50,9 +50,15 @@ export class AuthService {
     try {
       const user = await Backendless.UserService.login(
         userData.email,
-        userData.password
+        userData.password,
       );
-      return user;
+
+      const roles = await Backendless.UserService.getUserRoles();
+      console.log('User roles:', roles);
+
+      localStorage.setItem('userRoles', JSON.stringify(roles));
+
+      return { user, roles };
     } catch (error) {
       throw this.handleError(error);
     }
