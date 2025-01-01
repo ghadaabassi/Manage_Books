@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './product-card.component.html',
-  styleUrls: ['./product-card.component.css']
+
 })
 export class ProductCardComponent {
   @Input() product!: Product;
@@ -20,7 +20,7 @@ export class Product {
     public author: string,
     public image: string,
     public price: number,
-    public oldPrice?: number,
-    public description?: string
+    public description?: string,
+    public stock: number = 0
   ) {}
 }

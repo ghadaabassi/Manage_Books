@@ -1,0 +1,24 @@
+
+<div>
+  <h2>Manage Books</h2>
+  <div>
+    <input [(ngModel)]="newBook.title" placeholder="Title" />
+    <input [(ngModel)]="newBook.author" placeholder="Author" />
+    <input [(ngModel)]="newBook.price" type="number" placeholder="Price" />
+    <button (click)="addBook()">Add Book</button>
+  </div>
+
+  <div *ngFor="let book of books; let i = index">
+    <div *ngIf="editIndex !== i">
+      <p>{{ book.title }} by {{ book.author }} - {{ book.price }}</p>
+      <button (click)="editBook(i)">Edit</button>
+      <button (click)="deleteBook(i)">Delete</button>
+    </div>
+    <div *ngIf="editIndex === i">
+      <input [(ngModel)]="books[i].title" />
+      <input [(ngModel)]="books[i].author" />
+      <input [(ngModel)]="books[i].price" type="number" />
+      <button (click)="saveBook(i, books[i])">Save</button>
+    </div>
+  </div>
+</div>
