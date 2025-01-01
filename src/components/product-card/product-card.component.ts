@@ -1,6 +1,7 @@
-/* ...existing code... */
+
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Product } from '../../models/Product';
 
 @Component({
   selector: 'app-product-card',
@@ -14,13 +15,4 @@ export class ProductCardComponent {
 
 }
 
-export class Product {
-  constructor(
-    public title: string,
-    public author: string,
-    public image: string,
-    public price: number,
-    public description?: string,
-    public stock: number = 0
-  ) {}
-}
+
