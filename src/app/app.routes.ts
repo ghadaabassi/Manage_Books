@@ -14,12 +14,7 @@ import { roleGuard } from '../guards/role.guard';
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'model', component: ThreeDModelComponent },
-  {
-    path: 'free',
-    component: FreeBooksComponent,
-    canActivate: [roleGuard],
-    data: { role: 'Premium' },
-  },
+  { path: 'free', component: FreeBooksComponent },
   {
     path: 'recommender',
     component: BookRecommenderComponent,

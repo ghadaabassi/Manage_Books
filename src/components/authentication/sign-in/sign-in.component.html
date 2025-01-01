@@ -1,42 +1,30 @@
 <body>
   <div class="wrapper">
-    <form (ngSubmit)="signIn()" #signInForm="ngForm" novalidate>
+    <form (ngSubmit)="signIn()" #signInForm="ngForm">
       <h2>Login</h2>
 
       <div class="input-field">
         <input
-          id="email"
           type="email"
           [(ngModel)]="user.email"
           name="email"
-          #email="ngModel"
           required
-          placeholder=" "
+          placeholder="Enter your email"
         />
-        <label for="email">Email</label>
-        <div *ngIf="signInForm.submitted && email.invalid" class="error">
-          Email is required.
-        </div>
       </div>
 
       <div class="input-field">
         <input
-          id="password"
           type="password"
           [(ngModel)]="user.password"
           name="password"
-          #password="ngModel"
           required
-          placeholder=" "
+          placeholder="Enter your password"
         />
-        <label for="password">Password</label>
-        <div *ngIf="signInForm.submitted && password.invalid" class="error">
-          Password is required.
-        </div>
       </div>
 
       <div class="forget">
-        <label>
+        <label for="remember">
           <input type="checkbox" [(ngModel)]="rememberMe" name="rememberMe" />
           <p>Remember me</p>
         </label>
@@ -46,10 +34,7 @@
       <button type="submit" [disabled]="!signInForm.form.valid">Log In</button>
 
       <div class="register">
-        <p>
-          Don't have an account?
-          <a routerLink="/signup">Register</a>
-        </p>
+        <p>Don't have an account? <a routerLink="/register">Register</a></p>
       </div>
     </form>
   </div>
