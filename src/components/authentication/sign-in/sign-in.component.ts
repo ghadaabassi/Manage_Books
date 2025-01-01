@@ -25,11 +25,10 @@ export class SignInComponent {
       return;
     }
 
-
     this.authService.signIn(this.user).then(
       (user) => {
         console.log('Login successful:', user);
-        alert(`Welcome back, ${user.email}`);
+        alert(`Welcome back, ${user.username}`);
         this.router.navigate(['/recommender']);
       },
       (error) => {

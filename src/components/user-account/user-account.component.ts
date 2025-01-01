@@ -29,18 +29,31 @@ export class UserAccountComponent {
     this.loadUserData();
   }
 
-  loadUserData(): void {
-    const currentUser = this.authService.getCurrentUserData();
-
-    if (currentUser) {
-      this.userData = currentUser;
-      this.username = currentUser.username || 'No username';
-      this.userId = currentUser.objectId;
-      this.updatedData.username = currentUser.username || '';
-      this.updatedData.email = currentUser.email || '';
-    } else {
-      console.log('No user is logged in.');
+  async loadUserData(): Promise<void> {
+    try {
+      const currentUser = await this.authService.getCurrentUserData();
+      if (currentUser) {
+        this.userData = currentUser;
+        this.username = currentUser.username || 'No username';
+        this.userId = currentUser.objectId;
+        this.updatedData.username = currentUser.username || '';
+        this.updatedData.email = currentUser.email || '';
+      } else {
+        console.log('No user is logged in.');
+      }
+    } catch (error) {
+      console.error('Error loading user data:', error);
     }
+  }
+
+  userHasPremiumRole(): boolean {
+    return this.userData.roles.includes('premium');
+  }
+
+  upgradeToPremium(): void {
+    console.log('Upgrading to premium...');
+    this.userData.roles.push('premium');
+    alert('You have been upgraded to Premium!');
   }
 
   editProfile(): void {

@@ -61,19 +61,11 @@
         </div>
       </div>
 
-      <div class="social-icons mt-5 d-flex justify-content-center">
-        <a href="https://twitter.com" target="_blank" class="social-icon">
-          <i class="fa fa-twitter"></i>
-        </a>
-        <a href="https://facebook.com" target="_blank" class="social-icon">
-          <i class="fa fa-facebook-f"></i>
-        </a>
-        <a href="https://instagram.com" target="_blank" class="social-icon">
-          <i class="fa fa-instagram"></i>
-        </a>
-        <a href="https://linkedin.com" target="_blank" class="social-icon">
-          <i class="fa fa-linkedin"></i>
-        </a>
+      <!-- Conditional Button for Upgrading to Premium -->
+      <div *ngIf="!userHasPremiumRole()" class="d-flex mt-4">
+        <button (click)="upgradeToPremium()" class="btn btn-primary">
+          Upgrade to Premium
+        </button>
       </div>
     </div>
   </div>
