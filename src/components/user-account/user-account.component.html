@@ -55,17 +55,13 @@
 
       <div *ngIf="!isEditing">
         <div class="d-flex mt-4">
-          <button (click)="editProfile()" class="btn btn-dark">
+          <button (click)="editProfile()" class="btn btn-dark me-2">
             Edit Profile
           </button>
+          <button (click)="upgradeToPremium()" class="btn btn-dark me-2">
+            Upgrade to Premium
+          </button>
         </div>
-      </div>
-
-      <!-- Conditional Button for Upgrading to Premium -->
-      <div *ngIf="!userHasPremiumRole()" class="d-flex mt-4">
-        <button (click)="upgradeToPremium()" class="btn btn-primary">
-          Upgrade to Premium
-        </button>
       </div>
     </div>
   </div>

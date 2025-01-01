@@ -93,7 +93,7 @@ export class AuthService {
           console.log('Current User Data: ', currentUser);
           console.log('User Email: ', currentUser.email);
           console.log('Username: ', currentUser.username);
-          return currentUser; // Return the current user data
+          return currentUser;
         } else {
           console.log('No user is logged in.');
           return null;
