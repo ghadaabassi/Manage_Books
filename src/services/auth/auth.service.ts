@@ -50,12 +50,63 @@ export class AuthService {
     try {
       const user = await Backendless.UserService.login(
         userData.email,
-        userData.password
+        userData.password,
+        true
       );
-      return user;
+
+      const roles = await Backendless.UserService.getUserRoles();
+      console.log('User roles:', roles);
+
+      localStorage.setItem('userRoles', JSON.stringify(roles));
+
+      return { user, roles };
     } catch (error) {
       throw this.handleError(error);
     }
+  }
+
+  isAuthenticated(): boolean {
+    const userData = localStorage.getItem(
+      'Backendless_6AC1BC39-DAB7-4AD5-9FDF-976D80128B7C'
+    );
+    if (userData) {
+      const parsedData = JSON.parse(userData);
+      return parsedData['user-token'] !== undefined;
+    }
+    return false;
+  }
+
+  getUserRoles(): string[] {
+    const roles = localStorage.getItem('userRoles');
+    return roles ? JSON.parse(roles) : [];
+  }
+
+  hasRole(role: string): boolean {
+    const roles = this.getUserRoles();
+    return roles.includes(role);
+  }
+
+  getCurrentUserData(): any {
+    return Backendless.UserService.getCurrentUser()
+      .then((currentUser) => {
+        if (currentUser) {
+          const userData = currentUser;
+
+          console.log('Current User Data: ', userData);
+
+          console.log('User Email: ', userData.email);
+          console.log('Username: ', userData.username);
+
+          return userData;
+        } else {
+          console.log('No user is logged in.');
+          return null;
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching current user: ', error);
+        return null;
+      });
   }
 
   /**
@@ -71,19 +122,45 @@ export class AuthService {
   }
 
   /**
-   * Get the current logged-in user
-   * @returns The current user or null if no user is logged in
-   */
-  getCurrentUser(): any {
-    return Backendless.UserService.getCurrentUser();
-  }
-
-  /**
    * Handle errors from Backendless API
    * @param error The error object returned from Backendless API
    * @returns A human-readable error message
    */
   private handleError(error: any): string {
     return error?.message || 'An unknown error occurred.';
+  }
+
+  async updateUserData(updatedData: {
+    username?: string;
+    email?: string;
+    password?: string;
+  }) {
+    const currentUser = await Backendless.UserService.getCurrentUser();
+
+    if (!currentUser) {
+      throw new Error('User not logged in');
+    }
+
+    try {
+      const user = currentUser as Backendless.User;
+      if (updatedData.username) {
+        user.username = updatedData.username;
+      }
+
+      if (updatedData.email) {
+        user.email = updatedData.email;
+      }
+
+      if (updatedData.password) {
+        user.password = updatedData.password;
+      }
+
+      const updatedUser = await Backendless.UserService.update(user);
+      console.log('User data updated:', updatedUser);
+      return updatedUser;
+    } catch (error) {
+      console.error('Error updating user data:', error);
+      throw error;
+    }
   }
 }
