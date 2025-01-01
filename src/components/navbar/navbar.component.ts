@@ -12,11 +12,15 @@ import { CommonModule } from '@angular/common';
 export class NavbarComponent {
   constructor(private authService: AuthService, private router: Router) {}
   isAuthenticated: boolean = false;
+  isAdmin: boolean = false;
 
   ngOnInit(): void {
     this.isAuthenticated = this.authService.isAuthenticated();
+    this.isAdmin = this.authService.hasRole('Admin');
   }
-
+async signIn() {
+    await this.router.navigate(['/signIn']);
+  }
   async signOut() {
     try {
       await this.authService.signOut();

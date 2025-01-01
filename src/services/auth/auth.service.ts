@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environment/environment';
 import Backendless from 'backendless';
+import { Router } from '@angular/router';
+import { inject } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
@@ -33,6 +35,9 @@ export class AuthService {
 
       const result = await response.json();
       console.log('User registered successfully with Reader role:', result);
+
+      const router = inject(Router);
+      router.navigate(['/signIn']);
 
       return result;
     } catch (error) {

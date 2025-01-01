@@ -21,20 +21,24 @@ export class SignInComponent {
 
   signIn() {
     if (!this.user.email || !this.user.password) {
-      alert('Please fill in all fields.');
+      console.log('Please fill in all fields.');
       return;
     }
 
-
     this.authService.signIn(this.user).then(
-      (user) => {
-        console.log('Login successful:', user);
-        alert(`Welcome back, ${user.email}`);
-        this.router.navigate(['/recommender']);
+      (userData) => {
+        console.log('Login successful:', userData);
+        console.log(`Welcome back, ${userData.email}`);
+        const roles = userData.roles || [];
+        if (roles.includes('Admin')) {
+          this.router.navigate(['/book-management']);
+        } else {
+          this.router.navigate(['/recommender']);
+        }
       },
       (error) => {
         console.error('Login failed:', error);
-        alert(error);
+        console.log(error);
       }
     );
   }
