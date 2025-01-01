@@ -50,7 +50,9 @@ export class UserAccountComponent {
   }
 
   userHasPremiumRole(): boolean {
-    return this.userData.roles.includes('Premium');
+    const userRoles = localStorage.getItem('userRoles');
+    const roles = userRoles ? JSON.parse(userRoles) : [];
+    return roles.includes('Premium');
   }
 
   upgradeToPremium(): void {

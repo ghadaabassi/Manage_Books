@@ -10,6 +10,18 @@ body {
   color: #333;
 }
 
+.premium-badge {
+  font-size: 1.2rem;
+  padding: 1rem;
+  border-radius: 20px;
+  display: inline-block;
+  text-align: center;
+  background-color: #ee7541;
+  color: white;
+  font-weight: bold;
+  margin-top: 4px;
+}
+
 .container {
   max-width: 800px;
   margin: auto;
