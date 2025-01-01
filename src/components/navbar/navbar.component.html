@@ -4,7 +4,6 @@
     <div class="container-fluid">
       <div class="row align-items-center">
         <div class="col-md-2">
-          <!-- Logo -->
           <div class="main-logo">
             <a href="index.html">
               <img src="/images/logo.png" alt="Company Logo" />
@@ -12,7 +11,6 @@
           </div>
         </div>
         <div class="col-md-10">
-          <!-- Navigation -->
           <nav id="navbar" class="stellarnav">
             <ul class="menu-list">
               <li class="menu-item active"><a href="#home">Home</a></li>
@@ -37,6 +35,21 @@
               <li class="menu-item">
                 <a href="#download-app">Download App</a>
               </li>
+
+              <li class="menu-item" *ngIf="!isAuthenticated">
+                <button href="/signIn" class="sign-out-btn">Sign In</button>
+              </li>
+
+              <li class="menu-item" *ngIf="isAuthenticated">
+                <a href="/account" class="account-icon">
+                  <img
+                    src="images/icon.png"
+                    alt="Account"
+                    class="account-image"
+                  />
+                </a>
+              </li>
+
               <li class="menu-item" *ngIf="isAuthenticated">
                 <button (click)="signOut()" class="sign-out-btn">
                   Sign Out

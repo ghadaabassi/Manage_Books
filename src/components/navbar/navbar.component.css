@@ -86,7 +86,6 @@ ul {
   height: auto;
 }
 
-/* Navbar */
 #navbar {
   display: flex;
   align-items: center;
@@ -155,4 +154,35 @@ ul {
 .sign-out-btn:hover {
   color: white;
   background-color: var(--bs-primary);
+}
+
+.account-icon {
+  display: inline-block;
+  padding: 10px;
+  transition: transform 0.3s ease;
+}
+
+.account-icon:hover {
+  transform: scale(1.1);
+}
+
+.account-image {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+}
+
+.menu-item {
+  display: inline-block;
+  margin-right: 15px;
+}
+
+.menu-list {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.menu-item.sign-out-btn {
+  margin-left: 10px;
 }
