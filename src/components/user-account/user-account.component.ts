@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { environment } from '../../environment/environment';
 
 @Component({
   selector: 'app-user-account',
@@ -16,6 +17,7 @@ export class UserAccountComponent {
   profilePic: string = 'https://i.imgur.com/wvxPV9S.png';
 
   isEditing: boolean = false;
+  paymentLink: string = environment.pay;
 
   updatedData = {
     username: '',
@@ -52,7 +54,7 @@ export class UserAccountComponent {
 
   upgradeToPremium(): void {
     console.log('Upgrading to premium...');
-    this.userData.roles.push('premium');
+    window.location.href = this.paymentLink;
     alert('You have been upgraded to Premium!');
   }
 
@@ -74,7 +76,6 @@ export class UserAccountComponent {
       const updatedUser = await this.authService.updateUserData(
         this.updatedData
       );
-
       this.userData = updatedUser;
       this.username = updatedUser.username || '';
       this.isEditing = false;
