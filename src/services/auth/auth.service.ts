@@ -91,18 +91,14 @@ export class AuthService {
     return roles.includes(role);
   }
 
-  getCurrentUserData(): any {
+  getCurrentUserData(): Promise<any> {
     return Backendless.UserService.getCurrentUser()
       .then((currentUser) => {
         if (currentUser) {
-          const userData = currentUser;
-
-          console.log('Current User Data: ', userData);
-
-          console.log('User Email: ', userData.email);
-          console.log('Username: ', userData.username);
-
-          return userData;
+          console.log('Current User Data: ', currentUser);
+          console.log('User Email: ', currentUser.email);
+          console.log('Username: ', currentUser.username);
+          return currentUser;
         } else {
           console.log('No user is logged in.');
           return null;
