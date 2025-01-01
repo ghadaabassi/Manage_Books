@@ -17,10 +17,4 @@ pipeline {
             }
         }
 
-        stage('Checkout Code') {
-            steps {
-                git branch: 'main', credentialsId: 'github', url: 'https://github.com/ghadaabassi/Manage_Books.git'
-            }
-        }
-
 }}
