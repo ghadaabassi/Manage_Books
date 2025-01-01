@@ -1,24 +1,145 @@
-
-<div>
+<div class="book-management">
   <h2>Manage Books</h2>
-  <div>
-    <input [(ngModel)]="newBook.title" placeholder="Title" />
-    <input [(ngModel)]="newBook.author" placeholder="Author" />
-    <input [(ngModel)]="newBook.price" type="number" placeholder="Price" />
-    <button (click)="addBook()">Add Book</button>
+<!-- Search Bar -->
+<div class="search-bar">
+  <div class="search-controls">
+    <div class="search-input">
+      <input
+        id="searchTitle"
+        [(ngModel)]="searchQuery"
+        (ngModelChange)="searchBooks()"
+        placeholder="Search by title..."
+      />
+      <input
+        id="searchCategory"
+        [(ngModel)]="searchCategory"
+        (ngModelChange)="searchBooks()"
+        placeholder="Filter by category..."
+      />
+      <input
+        id="searchAuthor"
+        [(ngModel)]="searchAuthor"
+        (ngModelChange)="searchBooks()"
+        placeholder="Search by author..."
+      />
+    </div>
+  </div>
+</div>
+
+  <!-- Add Book Section -->
+  <div class="add-book-section">
+    <h3>Add New Book</h3>
+    <div class="add-book-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="bookTitle">Title:</label>
+          <input id="bookTitle" [(ngModel)]="newBook.title" />
+        </div>
+        <div class="form-group">
+          <label for="bookAuthor">Author:</label>
+          <input id="bookAuthor" [(ngModel)]="newBook.author" />
+        </div>
+        <div class="form-group">
+          <label for="bookCategory">Category:</label>
+          <input id="bookCategory" [(ngModel)]="newBook.category" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="bookPrice">Price:</label>
+          <input id="bookPrice" type="number" [(ngModel)]="newBook.price" />
+        </div>
+        <div class="form-group">
+          <label for="bookStock">Stock:</label>
+          <input id="bookStock" type="number" [(ngModel)]="newBook.stock" />
+        </div>
+        <div class="form-group">
+          <label for="bookImage">Book Cover:</label>
+          <input type="file" id="bookImage" (change)="handleFileInput($event)" accept="image/*" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group full-width">
+          <label for="bookDescription">Description:</label>
+          <textarea id="bookDescription" [(ngModel)]="newBook.description"></textarea>
+        </div>
+      </div>
+      <button (click)="addBook()" class="btn">Add Book</button>
+    </div>
   </div>
 
-  <div *ngFor="let book of books; let i = index">
-    <div *ngIf="editIndex !== i">
-      <p>{{ book.title }} by {{ book.author }} - {{ book.price }}</p>
-      <button (click)="editBook(i)">Edit</button>
-      <button (click)="deleteBook(i)">Delete</button>
+  <!-- Book List -->
+  <div class="book-list-container">
+    <div class="list-header">
+      <h3>Book List</h3>
+      <div class="view-toggle">
+        <button class="btn" [class.active]="viewMode === 'grid'" (click)="toggleView('grid')">Grid</button>
+        <button class="btn" [class.active]="viewMode === 'list'" (click)="toggleView('list')">List</button>
+      </div>
     </div>
-    <div *ngIf="editIndex === i">
-      <input [(ngModel)]="books[i].title" />
-      <input [(ngModel)]="books[i].author" />
-      <input [(ngModel)]="books[i].price" type="number" />
-      <button (click)="saveBook(i, books[i])">Save</button>
+
+    <div class="book-list" [class.grid-view]="viewMode === 'grid'" [class.list-view]="viewMode === 'list'">
+      <div *ngFor="let book of filteredBooks; let i = index" class="book-item">
+        <div *ngIf="editIndex !== i" class="book-content">
+          <div class="book-image">
+            <img [src]="getImageUrl(book.image)" (error)="handleImageError($event)" alt="Book cover"/>
+          </div>
+          <div class="book-details">
+            <h3>{{ book.title }}</h3>
+            <p>Author: {{ book.author }}</p>
+            <p>Category: {{ book.category }}</p>
+            <p>Price: {{ book.price }}</p>
+            <p>Stock: {{ book.stock }}</p>
+            <p class="description">{{ book.description }}</p>
+          </div>
+          <div class="book-actions">
+            <button class="btn" (click)="editBook(i)">Edit</button>
+            <button class="btn" (click)="deleteBook(i)">Delete</button>
+          </div>
+        </div>
+        <div *ngIf="editIndex === i" class="edit-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Title:</label>
+              <input [(ngModel)]="books[i].title" placeholder="Title" />
+            </div>
+            <div class="form-group">
+              <label>Author:</label>
+              <input [(ngModel)]="books[i].author" placeholder="Author" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Category:</label>
+              <input [(ngModel)]="books[i].category" placeholder="Category" />
+            </div>
+            <div class="form-group">
+              <label>Price:</label>
+              <input [(ngModel)]="books[i].price" type="number" placeholder="Price" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Stock:</label>
+              <input [(ngModel)]="books[i].stock" type="number" placeholder="Stock" />
+            </div>
+            <div class="form-group">
+              <label>Book Cover:</label>
+              <input type="file" (change)="handleEditFileInput($event, i)" accept="image/*" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group full-width">
+              <label>Description:</label>
+              <textarea [(ngModel)]="books[i].description" placeholder="Description"></textarea>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button class="btn" (click)="saveBook(i, books[i])">Save</button>
+            <button class="btn" (click)="editIndex = null">Cancel</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
