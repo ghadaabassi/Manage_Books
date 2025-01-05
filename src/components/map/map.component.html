@@ -1,0 +1,23 @@
+<h1>Meet us at our stores 🗺️</h1>
+
+<google-map
+  height="450px"
+  width="100%"
+  [center]="center"
+  [zoom]="zoom"
+  (mapClick)="moveMap($event)"
+>
+  <map-marker
+    *ngFor="let store of stores"
+    [position]="{ lat: store.lat, lng: store.lng }"
+    (mapClick)="onStoreClick(store)"
+  >
+  </map-marker>
+</google-map>
+
+<div *ngIf="display.lat && display.lng">
+  <h3>Store Details</h3>
+  <p><strong>Store Name:</strong> {{ display.name }}</p>
+  <p><strong>Latitude:</strong> {{ display.lat }}</p>
+  <p><strong>Longitude:</strong> {{ display.lng }}</p>
+</div>

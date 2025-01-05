@@ -8,7 +8,7 @@ import { SignInComponent } from '../components/authentication/sign-in/sign-in.co
 import { SignUpComponent } from '../components/authentication/sign-up/sign-up.component';
 import { NotfoundComponent } from '../components/notfound/notfound.component';
 import { UserAccountComponent } from '../components/user-account/user-account.component';
-
+import { MapComponent } from '../components/map/map.component';
 import { roleGuard } from '../guards/role.guard';
 import { BookManagementComponent } from '../components/admin/book-management/book-management.component';
 
@@ -26,6 +26,7 @@ export const routes: Routes = [
   { path: 'signIn', component: SignInComponent },
   { path: 'signup', component: SignUpComponent },
   { path: 'account', component: UserAccountComponent },
+  { path: 'map', component: MapComponent },
   {path:'book-management',component:BookManagementComponent},
   { path: '**', component: NotfoundComponent },
 ];
