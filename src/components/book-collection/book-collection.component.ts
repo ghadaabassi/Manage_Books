@@ -10,67 +10,78 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './book-collection.component.css',
 })
 export class BookCollectionComponent {
-  books: any[] = [];
   query: string = '';
+  books: any[] = [];
+  defaultBooks: any[] = [];
+  filteredBooks: any[] = [];
   loading: boolean = false;
   error: string | null = null;
 
   constructor(private http: HttpClient) {}
 
-  ngOnInit(): void {
-    // Fetch literature books on load
-    this.fetchLiteratureBooks();
+  ngOnInit() {
+    this.fetchDefaultBooks();
   }
 
-  fetchLiteratureBooks(): void {
-    const literatureQuery = 'classic literature';
-    const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(
-      literatureQuery
-    )}`;
+  fetchDefaultBooks() {
+    const defaultQuery = 'literature';
+    const url = `https://www.googleapis.com/books/v1/volumes?q=${defaultQuery}`;
 
     this.loading = true;
-    this.http.get(apiUrl).subscribe(
-      (response: any) => {
-        this.books = response.items || [];
+    this.http.get<any>(url).subscribe(
+      (data) => {
+        this.defaultBooks = data.items || [];
+        this.books = this.defaultBooks;
         this.loading = false;
-
-        if (this.books.length === 0) {
-          this.error = 'No literature books found.';
-        }
       },
       (error) => {
-        this.error = 'Failed to fetch books. Please try again later.';
+        this.error = 'Failed to fetch default books.';
         this.loading = false;
       }
     );
   }
 
-  fetchBooks(): void {
-    if (!this.query.trim()) {
-      this.error = 'Search query cannot be empty!';
+  onInputChange() {
+    if (this.query.length > 2) {
+      const url = `https://www.googleapis.com/books/v1/volumes?q=${this.query}`;
+      this.http.get<any>(url).subscribe(
+        (data) => {
+          this.filteredBooks = data.items || [];
+        },
+        (error) => {
+          this.error = 'Failed to fetch suggestions.';
+        }
+      );
+    } else {
+      this.filteredBooks = [];
+    }
+  }
+
+  searchBooks() {
+    if (!this.query) {
+      this.books = this.defaultBooks;
       return;
     }
 
+    const url = `https://www.googleapis.com/books/v1/volumes?q=${this.query}`;
+
     this.loading = true;
-    this.error = null;
-
-    const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(
-      this.query
-    )}`;
-
-    this.http.get(apiUrl).subscribe(
-      (response: any) => {
-        this.books = response.items || [];
+    this.http.get<any>(url).subscribe(
+      (data) => {
+        this.books = data.items || [];
+        this.filteredBooks = [];
         this.loading = false;
-
-        if (this.books.length === 0) {
-          this.error = 'No books found for this query.';
-        }
       },
       (error) => {
-        this.error = 'Failed to fetch books. Please try again later.';
+        this.error = 'Failed to fetch books. Please try again.';
         this.loading = false;
       }
     );
+  }
+
+  selectBook(book: any) {
+    this.query = book.volumeInfo.title;
+    this.filteredBooks = [];
+    this.searchBooks();
   }
 }

@@ -1,35 +1,55 @@
 <div class="container py-5">
-  <h1 class="text-center text-primary mb-4">📚 Book Collection</h1>
+  <h1 class="text-center text-primary fw-bold mb-4">📚 Explore Our Book Collection</h1>
 
-  <div class="input-group mb-5 mx-auto" style="max-width: 600px">
+  <div
+    class="input-group mb-5 mx-auto position-relative"
+    style="max-width: 600px"
+  >
     <input
       type="text"
       [(ngModel)]="query"
-      class="form-control"
-      placeholder="Search for books..."
+      class="form-control shadow-sm"
+      placeholder="Search for books by title, author..."
       aria-label="Search books"
+      (input)="onInputChange()"
+      autocomplete="off"
+      style="border-radius: 25px 0 0 25px; padding: 0.75rem;"
     />
     <button
-      class="btn btn-primary"
-      (click)="fetchBooks()"
+      class="btn btn-primary px-4 shadow-sm"
+      (click)="searchBooks()"
       aria-label="Search Button"
+      style="border-radius: 0 25px 25px 0;"
     >
       <i class="bi bi-search"></i> Search
     </button>
+
+    <div
+      *ngIf="filteredBooks.length > 0 && query"
+      class="autocomplete-suggestions shadow-sm rounded"
+    >
+      <ul class="list-group">
+        <li
+          *ngFor="let book of filteredBooks"
+          class="list-group-item list-group-item-action"
+          (click)="selectBook(book)"
+          style="cursor: pointer; padding: 10px; font-size: 0.95rem;"
+        >
+          <strong>{{ book.volumeInfo.title }}</strong> 
+          <span class="text-muted" style="font-size: 0.85rem;">
+            by {{ book.volumeInfo.authors?.join(", ") || "Unknown Author" }}
+          </span>
+        </li>
+      </ul>
+    </div>
   </div>
 
-  <div *ngIf="loading" class="text-center my-4">
-    <div class="spinner-border text-primary" role="status"></div>
-    <p>Loading books...</p>
-  </div>
-
-  <div *ngIf="error" class="alert alert-danger text-center">
-    {{ error }}
-  </div>
-
-  <div *ngIf="books.length > 0" class="row row-cols-1 row-cols-md-3 g-4">
+  <div
+    *ngIf="!query || books.length > 0"
+    class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4"
+  >
     <div class="col" *ngFor="let book of books">
-      <div class="card h-100 shadow-lg border-light rounded">
+      <div class="card h-100 shadow-lg border-0 rounded">
         <img
           [src]="
             book.volumeInfo.imageLinks?.thumbnail ||
@@ -39,8 +59,8 @@
           alt="{{ book.volumeInfo.title }}"
           style="height: 250px; object-fit: cover; border-radius: 10px"
         />
-        <div class="card-body">
-          <h5 class="card-title text-truncate" style="font-size: 1.1rem">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title text-truncate fw-semibold" style="font-size: 1.1rem">
             {{ book.volumeInfo.title }}
           </h5>
           <p
@@ -52,15 +72,16 @@
           <a
             [href]="book.volumeInfo.infoLink"
             target="_blank"
-            class="btn btn-outline-primary btn-sm w-100"
-            >View More</a
+            class="btn btn-outline-primary btn-sm mt-auto"
           >
+            View More
+          </a>
         </div>
       </div>
     </div>
   </div>
 
-  <div *ngIf="books.length === 0 && !loading" class="text-center">
-    <p>No books found. Try searching with a different query.</p>
+  <div *ngIf="query && books.length === 0 && !loading" class="text-center mt-4">
+    <p class="text-muted">No books found. Try searching with a different query.</p>
   </div>
 </div>
