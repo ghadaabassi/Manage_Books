@@ -11,6 +11,7 @@ import { UserAccountComponent } from '../components/user-account/user-account.co
 import { MapComponent } from '../components/map/map.component';
 import { BookCollectionComponent } from '../components/book-collection/book-collection.component';
 import { roleGuard } from '../guards/role.guard';
+import { BookManagementComponent } from '../components/admin/book-management/book-management.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -38,5 +39,6 @@ export const routes: Routes = [
     data: { role: 'Reader' },
   },
   { path: 'map', component: MapComponent },
+  {path:'book-management',component:BookManagementComponent},
   { path: '**', component: NotfoundComponent },
 ];
