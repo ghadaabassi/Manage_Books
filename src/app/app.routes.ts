@@ -10,12 +10,16 @@ import { NotfoundComponent } from '../components/notfound/notfound.component';
 import { UserAccountComponent } from '../components/user-account/user-account.component';
 import { MapComponent } from '../components/map/map.component';
 import { BookCollectionComponent } from '../components/book-collection/book-collection.component';
+import { PuzzleComponent } from '../components/puzzle/puzzle.component';
+
 import { roleGuard } from '../guards/role.guard';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'model', component: ThreeDModelComponent },
   { path: 'collection', component: BookCollectionComponent },
+  { path: 'puzzle', component: PuzzleComponent },
+
   {
     path: 'free',
     component: FreeBooksComponent,
