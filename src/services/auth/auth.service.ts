@@ -31,7 +31,9 @@ export class AuthService {
       if (!response.ok) {
         throw new Error('Failed to register user with "Reader" role.');
       } else {
-        this.router.navigate(['/login']);
+        this.router.navigate(['/login']).then(() => {
+          window.location.reload();
+        });
       }
 
       const result = await response.json();
@@ -59,8 +61,10 @@ export class AuthService {
 
       const roles = await Backendless.UserService.getUserRoles();
       console.log('User roles:', roles);
-
       localStorage.setItem('userRoles', JSON.stringify(roles));
+      this.router.navigate(['/collection']).then(() => {
+        window.location.reload();
+      });
 
       return { user, roles };
     } catch (error) {
