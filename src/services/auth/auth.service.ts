@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environment/environment';
 import Backendless from 'backendless';
 import { Router } from '@angular/router';
-import { inject } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +11,7 @@ export class AuthService {
   private apiId = environment.backendless.APP_ID;
   private assignRoleApi = environment.backendless.ROLE_API;
 
-  constructor() {
+  constructor(private router: Router) {
     Backendless.initApp(this.apiId, this.apiKey);
   }
 
@@ -31,13 +30,12 @@ export class AuthService {
 
       if (!response.ok) {
         throw new Error('Failed to register user with "Reader" role.');
+      } else {
+        this.router.navigate(['/login']);
       }
 
       const result = await response.json();
       console.log('User registered successfully with Reader role:', result);
-
-      const router = inject(Router);
-      router.navigate(['/signIn']);
 
       return result;
     } catch (error) {
@@ -91,18 +89,14 @@ export class AuthService {
     return roles.includes(role);
   }
 
-  getCurrentUserData(): any {
+  getCurrentUserData(): Promise<any> {
     return Backendless.UserService.getCurrentUser()
       .then((currentUser) => {
         if (currentUser) {
-          const userData = currentUser;
-
-          console.log('Current User Data: ', userData);
-
-          console.log('User Email: ', userData.email);
-          console.log('Username: ', userData.username);
-
-          return userData;
+          console.log('Current User Data: ', currentUser);
+          console.log('User Email: ', currentUser.email);
+          console.log('Username: ', currentUser.username);
+          return currentUser;
         } else {
           console.log('No user is logged in.');
           return null;

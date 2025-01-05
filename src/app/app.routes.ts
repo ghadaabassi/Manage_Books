@@ -9,12 +9,19 @@ import { SignUpComponent } from '../components/authentication/sign-up/sign-up.co
 import { NotfoundComponent } from '../components/notfound/notfound.component';
 import { UserAccountComponent } from '../components/user-account/user-account.component';
 import { MapComponent } from '../components/map/map.component';
+import { BookCollectionComponent } from '../components/book-collection/book-collection.component';
 import { roleGuard } from '../guards/role.guard';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'model', component: ThreeDModelComponent },
-  { path: 'free', component: FreeBooksComponent },
+  { path: 'collection', component: BookCollectionComponent },
+  {
+    path: 'free',
+    component: FreeBooksComponent,
+    canActivate: [roleGuard],
+    data: { role: 'Premium' },
+  },
   {
     path: 'recommender',
     component: BookRecommenderComponent,
@@ -24,7 +31,12 @@ export const routes: Routes = [
   { path: 'aboutUs', component: AboutUsComponent },
   { path: 'signIn', component: SignInComponent },
   { path: 'signup', component: SignUpComponent },
-  { path: 'account', component: UserAccountComponent },
+  {
+    path: 'account',
+    component: UserAccountComponent,
+    canActivate: [roleGuard],
+    data: { role: 'Reader' },
+  },
   { path: 'map', component: MapComponent },
   { path: '**', component: NotfoundComponent },
 ];
