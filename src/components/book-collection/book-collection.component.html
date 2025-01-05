@@ -1,1 +1,66 @@
-<p>book-collection works!</p>
+<div class="container py-5">
+  <h1 class="text-center text-primary mb-4">📚 Book Collection</h1>
+
+  <div class="input-group mb-5 mx-auto" style="max-width: 600px">
+    <input
+      type="text"
+      [(ngModel)]="query"
+      class="form-control"
+      placeholder="Search for books..."
+      aria-label="Search books"
+    />
+    <button
+      class="btn btn-primary"
+      (click)="fetchBooks()"
+      aria-label="Search Button"
+    >
+      <i class="bi bi-search"></i> Search
+    </button>
+  </div>
+
+  <div *ngIf="loading" class="text-center my-4">
+    <div class="spinner-border text-primary" role="status"></div>
+    <p>Loading books...</p>
+  </div>
+
+  <div *ngIf="error" class="alert alert-danger text-center">
+    {{ error }}
+  </div>
+
+  <div *ngIf="books.length > 0" class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col" *ngFor="let book of books">
+      <div class="card h-100 shadow-lg border-light rounded">
+        <img
+          [src]="
+            book.volumeInfo.imageLinks?.thumbnail ||
+            'https://via.placeholder.com/150/EEE/999?text=No+Image'
+          "
+          class="card-img-top"
+          alt="{{ book.volumeInfo.title }}"
+          style="height: 250px; object-fit: cover; border-radius: 10px"
+        />
+        <div class="card-body">
+          <h5 class="card-title text-truncate" style="font-size: 1.1rem">
+            {{ book.volumeInfo.title }}
+          </h5>
+          <p
+            class="card-text text-muted text-truncate"
+            style="font-size: 0.9rem"
+          >
+            {{ book.volumeInfo.authors?.join(", ") || "Unknown Author" }}
+          </p>
+          <a
+            [href]="book.volumeInfo.infoLink"
+            target="_blank"
+            class="btn btn-outline-primary btn-sm w-100"
+            >View More</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="books.length === 0 && !loading" class="text-center">
+    <p>No books found. Try searching with a different query.</p>
+  </div>
+</div>
