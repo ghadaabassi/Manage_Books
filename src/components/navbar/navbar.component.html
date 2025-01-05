@@ -21,8 +21,8 @@
               <li class="menu-item has-sub">
                 <a href="/aboutUs">About Us</a>
               </li>
-              <li class="menu-item">
-                <a href="#download-app">Download App</a>
+              <li class="menu-item" *ngIf="isAuthenticated">
+                <a href="/recommender">Recommender</a>
               </li>
 
               <li class="menu-item" *ngIf="!isAuthenticated">
