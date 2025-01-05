@@ -82,7 +82,12 @@ export class PuzzleComponent implements OnInit, OnDestroy {
     } else {
       this.gameOver = true;
       clearInterval(this.timerInterval);
+      this.saveScore();
     }
+  }
+
+  saveScore(): void {
+    localStorage.setItem('userScore', this.score.toString());
   }
 
   restartQuiz(): void {

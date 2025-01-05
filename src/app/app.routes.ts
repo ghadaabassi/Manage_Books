@@ -18,7 +18,7 @@ export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'model', component: ThreeDModelComponent },
   { path: 'collection', component: BookCollectionComponent },
-  { path: 'puzzle', component: PuzzleComponent },
+  { path: 'quiz', component: PuzzleComponent },
 
   {
     path: 'free',
