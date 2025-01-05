@@ -14,7 +14,7 @@
       <h3>{{ product.title }}</h3>
       <p *ngIf="product.author">{{ product.author }}</p>
       <div class="item-price">
-        <span *ngIf="product.oldPrice" class="prev-price">\${{ product.oldPrice }}</span>
+        <span *ngIf="product.price" class="prev-price">\${{ product.price }}</span>
         ${{ product.price }}
       </div>
     </figcaption>
