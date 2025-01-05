@@ -33,7 +33,7 @@ export class SignInComponent {
         if (roles.includes('Admin')) {
           this.router.navigate(['/book-management']);
         } else {
-          this.router.navigate(['/recommender']);
+          this.router.navigate(['/collection']);
         }
       },
       (error) => {
