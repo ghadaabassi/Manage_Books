@@ -15,13 +15,15 @@ export class BookManagementComponent implements OnInit {
   books: Product[] = [];
   filteredBooks: Product[] = [];
   newBook: Product = {
+    id: '0',
     title: '',
     author: '',
     image: '',
     price: 0,
     description: '',
     category: '',
-    stock: 0
+    stock: 0,
+    quantity: 0
   };
   searchQuery: string = '';
   searchCategory: string = '';
@@ -62,7 +64,8 @@ export class BookManagementComponent implements OnInit {
 
   addBook(): void {
     this.booksService.addBook({ ...this.newBook });
-    this.newBook = { title: '', author: '', image: '', price: 0, description: '', category: '', stock: 0 };
+
+    this.newBook = {id:'0', title: '', author: '', image: '', price: 0, description: '', category: '', stock: 0, quantity: 0};
     this.loadBooks();
   }
 

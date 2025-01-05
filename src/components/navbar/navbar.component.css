@@ -175,6 +175,7 @@ ul {
 .menu-item {
   display: inline-block;
   margin-right: 15px;
+  position: relative;  /* Add this */
 }
 
 .menu-list {
@@ -185,4 +186,171 @@ ul {
 
 .menu-item.sign-out-btn {
   margin-left: 10px;
+}
+
+.notification-icon {
+  position: relative;
+  cursor: pointer;
+  padding: 8px;
+  z-index: 1001;  /* Add this */
+}
+
+.notification-icon i {
+  font-size: 1.2rem;
+  color: #555;
+}
+
+.notification-icon .badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #ff4444;
+  color: white;
+  border-radius: 50%;
+  padding: 3px 6px;
+  font-size: 0.7rem;
+}
+
+.notification-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 500px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  margin-top: 10px;
+  z-index: 1000;
+  padding: 10px 0;
+}
+
+/* Update triangle pointer position */
+.notification-dropdown::before {
+  right: 15px;  /* Changed from 110px */
+  content: '';
+  position: absolute;
+  top: -8px;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid white;
+}
+
+.notification-dropdown ul {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.notification-dropdown li {
+  padding: 10px 15px;
+  border-bottom: 1px solid #eee;
+  transition: background-color 0.2s;
+}
+
+.notification-dropdown li:hover {
+  background-color: #f8f9fa;
+}
+
+.notification-dropdown li:last-child {
+  border-bottom: none;
+}
+
+.notification-dropdown .unread {
+  background-color: #f0f2f5;
+}
+
+.notification-dropdown h4 {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.notification-dropdown p {
+  margin: 5px 0;
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.notification-dropdown small {
+  color: #999;
+  font-size: 0.75rem;
+}
+
+/* Triangle pointer */
+.notification-dropdown::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  right: 110px;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid white;
+}
+
+.notification-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.notification-header h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.clear-all {
+  background: none;
+  border: none;
+  color: #666;
+  font-size: 0.8rem;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.clear-all:hover {
+  color: #ff4444;
+}
+
+.notification-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.remove-notification {
+  background: none;
+  border: none;
+  color: #999;
+  padding: 5px;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.remove-notification:hover {
+  color: #ff4444;
+}
+
+.icons-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.cart-icon {
+  position: relative;
+  cursor: pointer;
+  padding: 8px;
+  z-index: 1;
+}
+
+app-cart-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 1000;
 }

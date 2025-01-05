@@ -45,11 +45,23 @@ export class NotificationService {
     this.saveNotifications(notifications);
   }
 
+  markAllAsRead(): void {
+    const notifications = this.notificationsSubject.value.map(notification => ({
+      ...notification,
+      read: true
+    }));
+    this.saveNotifications(notifications);
+  }
+
   clearNotification(id: string): void {
     const notifications = this.notificationsSubject.value.filter(
       notification => notification.id !== id
     );
     this.saveNotifications(notifications);
+  }
+
+  clearAllNotifications(): void {
+    this.saveNotifications([]);
   }
 
   getUnreadCount(): number {

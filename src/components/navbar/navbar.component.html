@@ -59,9 +59,51 @@
                   Sign Out
                 </button>
               </li>
+              <li class="menu-item">
+                <div class="icons-wrapper">
+                  <div class="notification-icon" (click)="toggleNotifications()">
+                    <i class="fas fa-bell"></i>
+                    <span class="badge" *ngIf="unreadCount > 0">{{ unreadCount }}</span>
+                    <div class="notification-dropdown" *ngIf="isNotificationsVisible">
+                      <div class="notification-header">
+                        <h3>Notifications</h3>
+                        <button class="clear-all" (click)="clearAllNotifications()">Clear All</button>
+                      </div>
+                      <ul>
+                        <li *ngFor="let notification of notificationService.notifications$ | async"
+                            [class.unread]="!notification.read">
+                          <div class="notification-content">
+                            <div>
+                              <h4>{{ notification.title }}</h4>
+                              <p>{{ notification.content }}</p>
+                              <small>{{ notification.timestamp | date:'short' }}</small>
+                            </div>
+                            <button class="remove-notification" (click)="removeNotification(notification.id, $event)">
+                              <i class="fas fa-times"></i>
+                            </button>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
 
 
+                </div>
+              </li>
+              <li class="menu-item">
+                <div class="icons-wrapper">
+                  <div class="cart-icon" (click)="toggleCartDropdown()">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="badge" *ngIf="cartCount > 0">{{ cartCount }}</span>
+                  </div>
+                  <app-cart-dropdown
+                    [show]="isCartOpen"
+                    (onClose)="isCartOpen = false"
+                  ></app-cart-dropdown>
+                </div>
+              </li>
             </ul>
+
             <button class="hamburger" aria-label="Toggle Menu">
               <span class="bar"></span>
               <span class="bar"></span>

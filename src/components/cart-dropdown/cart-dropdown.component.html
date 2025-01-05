@@ -1,0 +1,35 @@
+<div class="cart-dropdown" [class.show]="show">
+  <div class="cart-header">
+    <h3>Shopping Cart</h3>
+    <button (click)="onClose.emit()">×</button>
+  </div>
+  
+  <div class="cart-items">
+    <div class="cart-item" *ngFor="let item of cartItems">
+      <img [src]="item.image" [alt]="item.title" class="cart-item-image">
+      <div class="cart-item-details">
+        <h4>{{ item.title }}</h4>
+        <p>${{ item.price }}</p>
+        <div class="quantity-controls">
+          <button (click)="removeItem(item.id)">-</button>
+          <span>{{ item.quantity || 1 }}</span>
+          <button (click)="cartService.addToCart(item)">+</button>
+        </div>
+      </div>
+    </div>
+    
+    <div *ngIf="cartItems.length === 0" class="empty-cart">
+      Your cart is empty
+    </div>
+  </div>
+
+  <div class="cart-footer" *ngIf="cartItems.length > 0">
+    <div class="cart-total">
+      <span>Total:</span>
+      <span>${{ total.toFixed(2) }}</span>
+    </div>
+    <button class="view-cart-btn" routerLink="/cart" (click)="onClose.emit()">
+      View Cart
+    </button>
+  </div>
+</div>

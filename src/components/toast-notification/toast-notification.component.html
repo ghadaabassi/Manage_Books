@@ -1,0 +1,7 @@
+<div *ngIf="show" class="toast" [class.hide]="!show">
+  <div class="toast-content">
+    <div class="toast-title">{{ title }}</div>
+    <div class="toast-message">{{ message }}</div>
+  </div>
+  <button class="toast-close" (click)="onClose.emit()">×</button>
+</div>
