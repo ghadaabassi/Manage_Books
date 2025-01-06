@@ -31,7 +31,7 @@ export class AuthService {
       if (!response.ok) {
         throw new Error('Failed to register user with "Reader" role.');
       } else {
-        this.router.navigate(['/login']).then(() => {
+        this.router.navigate(['/signIn']).then(() => {
           window.location.reload();
         });
       }
