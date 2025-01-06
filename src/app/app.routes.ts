@@ -20,7 +20,6 @@ export const routes: Routes = [
     path: 'model',
     component: ThreeDModelComponent,
     canActivate: [roleGuard],
-    data: { role: 'AuthenticatedUser' },
   },
   {
     path: 'collection',
