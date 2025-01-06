@@ -13,7 +13,6 @@
           placeholder="Enter your email"
           [class.invalid]="email.invalid && email.touched"
         />
-        <!-- Error message for invalid email -->
         <div *ngIf="email.invalid && email.touched" class="error-message">
           Please enter a valid email address.
         </div>
