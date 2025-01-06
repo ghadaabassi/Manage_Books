@@ -9,9 +9,12 @@ import { SignUpComponent } from '../components/authentication/sign-up/sign-up.co
 import { NotfoundComponent } from '../components/notfound/notfound.component';
 import { UserAccountComponent } from '../components/user-account/user-account.component';
 import { CartComponent } from '../components/cart/cart.component';
+import { OrderComponent } from '../components/order/order.component';
 
 import { roleGuard } from '../guards/role.guard';
 import { BookManagementComponent } from '../components/admin/book-management/book-management.component';
+import { AdminOrdersComponent } from '../components/admin-orders/admin-orders.component';
+import { ClientOrdersComponent } from '../components/client-orders/client-orders.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -27,7 +30,10 @@ export const routes: Routes = [
   { path: 'signIn', component: SignInComponent },
   { path: 'signup', component: SignUpComponent },
   { path: 'cart', component: CartComponent },
+  { path: 'order', component: OrderComponent },
   { path: 'account', component: UserAccountComponent },
-  {path:'book-management',component:BookManagementComponent},
+  { path: 'book-management', component: BookManagementComponent },
+  { path: 'order-management', component: AdminOrdersComponent },
+  { path: 'view-orders', component: ClientOrdersComponent },
   { path: '**', component: NotfoundComponent },
 ];

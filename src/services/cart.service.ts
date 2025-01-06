@@ -61,4 +61,8 @@ export class CartService {
     localStorage.removeItem(this.STORAGE_KEY);
     this.cartItems.next([]);
   }
+
+  getCartSnapshot(): Product[] {
+    return this.cartItems.getValue();
+  }
 }

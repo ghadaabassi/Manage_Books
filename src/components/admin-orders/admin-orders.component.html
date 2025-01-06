@@ -1,0 +1,24 @@
+<div class="admin-orders-container">
+  <h2>All Orders</h2>
+  <div *ngIf="orders.length > 0; else noOrders">
+    <div class="order" *ngFor="let order of orders">
+      <h3>Order ID: {{ order.id }}</h3>
+      <p>Date: {{ order.date}}</p>
+      <p>Status: {{ order.status }}</p>
+      <ul>
+        <li *ngFor="let item of order.items">
+          {{ item.title }} - {{ item.quantity }} x {{ item.price }}
+        </li>
+      </ul>
+      <p>Total: {{ order.total  }}</p>
+      <label for="status">Update Status:</label>
+      <select id="status" [(ngModel)]="order.status" (change)="updateStatus(order.id, order.status)">
+        <option *ngFor="let status of statuses" [value]="status">{{ status }}</option>
+      </select>
+      <hr />
+    </div>
+  </div>
+  <ng-template #noOrders>
+    <p>No orders found.</p>
+  </ng-template>
+</div>

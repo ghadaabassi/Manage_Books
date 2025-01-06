@@ -1,0 +1,30 @@
+<form (ngSubmit)="onSubmit()">
+  <div>
+    <label for="country">Country:</label>
+    <input id="country" [(ngModel)]="address.country" name="country" required />
+  </div>
+  <div>
+    <label for="city">City:</label>
+    <input id="city" [(ngModel)]="address.city" name="city" required />
+  </div>
+  <div>
+    <label for="address">Address:</label>
+    <input id="address" [(ngModel)]="address.address" name="address" required />
+  </div>
+  <div>
+    <label for="postalCode">Postal Code:</label>
+    <input id="postalCode" [(ngModel)]="address.postalCode" name="postalCode" required />
+  </div>
+
+  <div class="order-summary">
+    <h3>Order Summary</h3>
+    <ul>
+      <li *ngFor="let item of cartItems">
+        {{ item.title }} - {{ item.quantity }} x ${{ item.price }}
+      </li>
+    </ul>
+    <p>Total: {{ getTotal()  }}</p>
+  </div>
+
+  <button type="submit" [disabled]="!validateForm()">Place Order</button>
+</form>

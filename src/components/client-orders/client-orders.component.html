@@ -1,0 +1,20 @@
+<div class="client-orders-container">
+  <h2>Your Orders</h2>
+  <div *ngIf="orders.length > 0; else noOrders">
+    <div class="order" *ngFor="let order of orders">
+      <h3>Order ID: {{ order.id }}</h3>
+      <p>Date: {{ order.date  }}</p>
+      <p>Status: {{ order.status }}</p>
+      <ul>
+        <li *ngFor="let item of order.items">
+          {{ item.title }} - {{ item.quantity }} x {{ item.price  }}
+        </li>
+      </ul>
+      <p>Total: {{ order.total }}</p>
+      <hr />
+    </div>
+  </div>
+  <ng-template #noOrders>
+    <p>You have not placed any orders yet.</p>
+  </ng-template>
+</div>

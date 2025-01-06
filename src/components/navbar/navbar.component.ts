@@ -20,15 +20,15 @@ isDebug: boolean=true;
   isNotificationsVisible = false;
   isAuthenticated: boolean = false;
   isAdmin: boolean = false;
-  isCartOpen = false; // Added for cart dropdown toggle
+  isCartOpen = false;
 
-  cartCount: number = 0; // Add this property
+  cartCount: number = 0;
 
   constructor(
     private authService: AuthService,
     private router: Router,
     public notificationService: NotificationService,
-    private cartService: CartService // Inject cart service
+    private cartService: CartService
   ) {}
 
 
@@ -37,16 +37,14 @@ isDebug: boolean=true;
     this.isAuthenticated = this.authService.isAuthenticated();
     this.isAdmin = this.authService.hasRole('Admin');
 
-    // Subscribe to notifications
     this.notificationService.notifications$.subscribe(notifications => {
       this.unreadCount = notifications.filter(n => !n.read).length;
     });
 
-    // Subscribe to cart updates
     this.cartService.getCart().subscribe(cartItems => {
       this.cartCount = cartItems.length;
-    }); // Initial load
-  
+    });
+
     this.notificationService.notifications$.subscribe(notifications => {
       this.unreadCount = notifications.filter(n => !n.read).length;
     });
@@ -63,7 +61,7 @@ isDebug: boolean=true;
     this.isNotificationsVisible = !this.isNotificationsVisible;
   }
 
-  toggleCartDropdown(): void { 
+  toggleCartDropdown(): void {
     this.isCartOpen = !this.isCartOpen;
     console.log('====================================');
     console.log('Cart dropdown toggled');
