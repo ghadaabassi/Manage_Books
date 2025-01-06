@@ -15,6 +15,8 @@ import { BookManagementComponent } from '../components/admin/book-management/boo
 import { FeedbackComponent } from '../components/feedback/feedback.component';
 import { StatistiqueComponent } from '../components/statistique/statistique.component';
 import { SupportComponent } from '../components/support/support.component';
+import { BookRentalComponent } from '../components/book-rental/book-rental.component';
+import { ReviewsCommentsComponent } from '../components/reviews-comments/reviews-comments.component';
 
 
 export const routes: Routes = [
@@ -44,8 +46,13 @@ export const routes: Routes = [
   },
   { path: 'map', component: MapComponent },
   {path:'book-management',component:BookManagementComponent},
-  { path: '**', component: NotfoundComponent },
   { path: 'statistique', component: StatistiqueComponent },
   { path: 'feedback', component: FeedbackComponent },
   { path: 'support', component: SupportComponent },
+  { path: 'rent', component: BookRentalComponent },
+  { path: 'reviews', component: ReviewsCommentsComponent },
+  { path: '**', component: NotfoundComponent },
+
+
+
 ];

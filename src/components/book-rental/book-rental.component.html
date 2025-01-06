@@ -1,0 +1,14 @@
+<div class="book-rental-container">
+    <h2>Rent a Book</h2>
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="bookTitle">Book Title</label>
+        <input type="text" id="bookTitle" [(ngModel)]="bookTitle" name="bookTitle" required />
+      </div>
+      <div class="form-group">
+        <label for="rentalDuration">Rental Duration (days)</label>
+        <input type="number" id="rentalDuration"  [(ngModel)]="rentalDuration" name="rentalDuration" required />
+      </div>
+      <button type="submit" class="btn btn-primary">Rent Book</button>
+    </form>
+  </div>

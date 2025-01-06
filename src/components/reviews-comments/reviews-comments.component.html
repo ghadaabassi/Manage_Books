@@ -1,0 +1,18 @@
+<div class="reviews-comments-container">
+    <h2>Reviews and Comments</h2>
+    <form (ngSubmit)="addReview()">
+      <div class="form-group">
+        <label for="reviewText">Your Review</label>
+        <textarea id="reviewText" [(ngModel)]="reviewText" name="reviewText" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit Review</button>
+    </form>
+    <div class="reviews-list">
+      <h3>All Reviews</h3>
+      <ul>
+        <li *ngFor="let review of reviews">
+          <p>{{ review }}</p>
+        </li>
+      </ul>
+    </div>
+  </div>

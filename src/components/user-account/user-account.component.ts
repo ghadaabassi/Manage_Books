@@ -3,7 +3,7 @@ import { AuthService } from '../../services/auth/auth.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { environment } from '../../environment/environment';
-import { HttpClient } from '@angular/common/http';
+  import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-user-account',
