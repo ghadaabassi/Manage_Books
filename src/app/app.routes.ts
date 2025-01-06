@@ -12,6 +12,10 @@ import { MapComponent } from '../components/map/map.component';
 import { BookCollectionComponent } from '../components/book-collection/book-collection.component';
 import { roleGuard } from '../guards/role.guard';
 import { BookManagementComponent } from '../components/admin/book-management/book-management.component';
+import { FeedbackComponent } from '../components/feedback/feedback.component';
+import { StatistiqueComponent } from '../components/statistique/statistique.component';
+import { SupportComponent } from '../components/support/support.component';
+
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -41,4 +45,7 @@ export const routes: Routes = [
   { path: 'map', component: MapComponent },
   {path:'book-management',component:BookManagementComponent},
   { path: '**', component: NotfoundComponent },
+  { path: 'statistique', component: StatistiqueComponent },
+  { path: 'feedback', component: FeedbackComponent },
+  { path: 'support', component: SupportComponent },
 ];

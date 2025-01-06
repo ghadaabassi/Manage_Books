@@ -1,0 +1,23 @@
+<div class="feedback-container">
+    <h2>Feedback</h2>
+    <form (ngSubmit)="onSubmit()">
+      <!-- Rating Section -->
+      <div class="rating-section">
+        <label for="rating">Rating:</label>
+        <div class="stars">
+          <!-- Loop through the 'stars' array -->
+          <span *ngFor="let star of stars" (click)="feedback.rating = star" [class.filled]="star <= feedback.rating">&#9733;</span>
+        </div>
+      </div>
+  
+      <!-- Comment Section -->
+      <div class="comment-section">
+        <label for="comment">Your Comments:</label>
+        <textarea id="comment" [(ngModel)]="feedback.comment" name="comment" rows="4" placeholder="Leave your comments here..."></textarea>
+      </div>
+  
+      <!-- Submit Button -->
+      <button type="submit" class="btn btn-primary">Submit Feedback</button>
+    </form>
+  </div>
+  

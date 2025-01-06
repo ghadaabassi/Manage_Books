@@ -1,0 +1,22 @@
+<div class="support-container">
+    <h2>Support</h2>
+    <form (ngSubmit)="onSubmit()">
+      <!-- Issue Type Section -->
+      <div class="issue-type-section">
+        <label for="issue-type">Issue Type:</label>
+        <select id="issue-type" [(ngModel)]="supportTicket.issueType" name="issueType">
+          <option *ngFor="let issue of issueTypes" [value]="issue">{{ issue }}</option>
+        </select>
+      </div>
+  
+      <!-- Description Section -->
+      <div class="description-section">
+        <label for="description">Description:</label>
+        <textarea id="description" [(ngModel)]="supportTicket.description" name="description" rows="4" placeholder="Describe your issue..."></textarea>
+      </div>
+  
+      <!-- Submit Button -->
+      <button type="submit" class="btn btn-primary">Submit Ticket</button>
+    </form>
+  </div>
+  
