@@ -32,7 +32,7 @@ export class SignUpComponent {
       const response = await this.authService.signUp(this.user);
       console.log('User created successfully:', response);
       this.router.navigate(['/model']).then(() => {
-        setTimeout(() => this.router.navigate(['/free']), 5000);
+        setTimeout(() => this.router.navigate(['/free']), 7000);
       });
     } catch (error) {
       console.error('Error during sign-up:', error);
