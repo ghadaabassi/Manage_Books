@@ -2,59 +2,6 @@
   <div class="wrapper">
     <form (ngSubmit)="signIn()" #signInForm="ngForm">
       <h2>Login</h2>
-
-      <div class="input-field">
-        <input
-          type="email"
-          [(ngModel)]="user.email"
-          name="email"
-          required
-          #email="ngModel"
-          placeholder="Enter your email"
-          [class.invalid]="email.invalid && email.touched"
-        />
-        <div *ngIf="email.invalid && email.touched" class="error-message">
-          Please enter a valid email address.
-        </div>
-      </div>
-
-      <div class="input-field">
-        <input
-          type="password"
-          [(ngModel)]="user.password"
-          name="password"
-          required
-          minlength="6"
-          #password="ngModel"
-          placeholder="Enter your password"
-          [class.invalid]="password.invalid && password.touched"
-        />
-        <div *ngIf="password.invalid && password.touched" class="error-message">
-          Password must be at least 6 characters long.
-        </div>
-      </div>
-
-      <div class="forget">
-        <label for="remember">
-          <input type="checkbox" [(ngModel)]="rememberMe" name="rememberMe" />
-          <p>Remember me</p>
-        </label>
-        <a routerLink="/forgot-password">Forgot password?</a>
-      </div>
-
-      <button type="submit" [disabled]="!signInForm.form.valid">Log In</button>
-
-      <div>
-        <p style="color: black">New here? <a href="/signup">Sign up</a></p>
-      </div>
-    </form>
-  </div>
-</body>
-<body>
-  <div class="wrapper">
-    <form (ngSubmit)="signIn()" #signInForm="ngForm">
-      <h2>Login</h2>
-
       <div class="input-field">
         <input
           type="email"

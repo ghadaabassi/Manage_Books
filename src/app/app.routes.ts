@@ -16,8 +16,18 @@ import { roleGuard } from '../guards/role.guard';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'model', component: ThreeDModelComponent },
-  { path: 'collection', component: BookCollectionComponent },
+  {
+    path: 'model',
+    component: ThreeDModelComponent,
+    canActivate: [roleGuard],
+    data: { role: 'AuthenticatedUser' },
+  },
+  {
+    path: 'collection',
+    component: BookCollectionComponent,
+    canActivate: [roleGuard],
+    data: { role: 'AuthenticatedUser' },
+  },
   { path: 'quiz', component: PuzzleComponent },
 
   {
@@ -30,7 +40,7 @@ export const routes: Routes = [
     path: 'recommender',
     component: BookRecommenderComponent,
     canActivate: [roleGuard],
-    data: { role: 'Reader' },
+    data: { role: 'AuthenticatedUser' },
   },
   { path: 'aboutUs', component: AboutUsComponent },
   { path: 'signIn', component: SignInComponent },
@@ -39,7 +49,7 @@ export const routes: Routes = [
     path: 'account',
     component: UserAccountComponent,
     canActivate: [roleGuard],
-    data: { role: 'Reader' },
+    data: { role: 'AuthenticatedUser' },
   },
   { path: 'map', component: MapComponent },
   { path: '**', component: NotfoundComponent },

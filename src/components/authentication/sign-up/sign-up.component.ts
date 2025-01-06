@@ -29,10 +29,11 @@ export class SignUpComponent {
     }
 
     try {
+      console.log('Signing up with user data:', this.user);
       const response = await this.authService.signUp(this.user);
       console.log('User created successfully:', response);
       this.router.navigate(['/model']).then(() => {
-        setTimeout(() => this.router.navigate(['/collection']), 7000);
+        setTimeout(() => this.router.navigate(['/signIn']), 7000);
       });
     } catch (error) {
       console.error('Error during sign-up:', error);

@@ -18,7 +18,7 @@ export class NavbarComponent {
     this.isAuthenticated = this.authService.isAuthenticated();
     this.isAdmin = this.authService.hasRole('Admin');
   }
-async signIn() {
+  async signIn() {
     await this.router.navigate(['/signIn']);
   }
   async signOut() {
@@ -26,7 +26,9 @@ async signIn() {
       await this.authService.signOut();
       console.log('User signed out successfully');
       localStorage.removeItem('userRoles');
-      await this.router.navigate(['/signIn']);
+      this.router.navigate(['/signIn']).then(() => {
+        window.location.reload();
+      });
     } catch (error) {
       console.error('Error during sign-out:', error);
     }

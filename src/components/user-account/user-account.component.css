@@ -163,9 +163,10 @@ a.btn:hover {
 .editbtn {
   border: solid black 1px;
   background-color: transparent;
-  color: var(--bs-primary);
+  color: #000;
 }
 
 .editbtn:hover {
   background-color: black;
+  color: white;
 }

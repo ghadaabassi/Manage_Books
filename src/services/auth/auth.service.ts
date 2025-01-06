@@ -15,34 +15,14 @@ export class AuthService {
     Backendless.initApp(this.apiId, this.apiKey);
   }
 
-  /**
-   * Register a new user and assign the "Reader" role using the Backendless API
-   * @param userData User registration data
-   * @returns A Promise containing the result of the registration
-   */
   async signUp(userData: any): Promise<any> {
     try {
-      const response = await fetch(this.assignRoleApi, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(userData),
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to register user with "Reader" role.');
-      } else {
-        this.router.navigate(['/signIn']).then(() => {
-          window.location.reload();
-        });
-      }
-
-      const result = await response.json();
-      console.log('User registered successfully with Reader role:', result);
-
+      const result = await Backendless.UserService.register(userData);
+      console.log('User registered successfully:', result);
       return result;
     } catch (error) {
       console.error('Error during sign-up process:', error);
-      throw this.handleError(error);
+      throw error;
     }
   }
 
