@@ -19,7 +19,7 @@ export class SliderComponent {
       image: 'images/main-banner2.jpg',
     },
     {
-      title: 'Cats gonna be Happy',
+      title: 'Life of the wild',
       description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
                     eu feugiat amet, libero ipsum enim pharetra hac. Urna commodo,
                     lacus ut magna velit eleifend. Amet, quis urna, a eu.`,

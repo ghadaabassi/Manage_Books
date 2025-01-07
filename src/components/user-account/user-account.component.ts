@@ -28,8 +28,10 @@ export class UserAccountComponent {
 
   constructor(private authService: AuthService, private http: HttpClient) {}
 
+  userCredits = 0;
   ngOnInit(): void {
     this.loadUserData();
+    this.userCredits = parseInt(localStorage.getItem('userScore') || '0', 10);
   }
 
   async loadUserData(): Promise<void> {

@@ -1,6 +1,6 @@
 <body>
   <div class="wrapper">
-    <form (ngSubmit)="signUp()">
+    <form (ngSubmit)="signUp(signUpForm)" #signUpForm="ngForm">
       <h2>Create Account</h2>
 
       <div class="input-field">
@@ -9,13 +9,29 @@
           [(ngModel)]="user.username"
           name="username"
           required
+          #username="ngModel"
+          [class.invalid]="username.invalid && username.touched"
         />
         <label>Enter your full name</label>
+        <div *ngIf="username.invalid && username.touched" class="error-message">
+          Username is required.
+        </div>
       </div>
 
       <div class="input-field">
-        <input type="email" [(ngModel)]="user.email" name="email" required />
+        <input
+          type="email"
+          [(ngModel)]="user.email"
+          name="email"
+          required
+          email
+          #email="ngModel"
+          [class.invalid]="email.invalid && email.touched"
+        />
         <label>Enter your email</label>
+        <div *ngIf="email.invalid && email.touched" class="error-message">
+          Please enter a valid email address.
+        </div>
       </div>
 
       <div class="input-field">
@@ -24,23 +40,66 @@
           [(ngModel)]="user.password"
           name="password"
           required
+          minlength="6"
+          #password="ngModel"
+          [class.invalid]="password.invalid && password.touched"
         />
         <label>Create a password</label>
+        <div *ngIf="password.invalid && password.touched" class="error-message">
+          Password must be at least 6 characters long.
+        </div>
       </div>
 
       <div class="input-field">
-        <input type="password" name="confirmPassword" required />
+        <input
+          type="password"
+          [(ngModel)]="user.confirmPassword"
+          name="confirmPassword"
+          required
+          #confirmPassword="ngModel"
+          [class.invalid]="
+            (confirmPassword.invalid && confirmPassword.touched) ||
+            user.password !== user.confirmPassword
+          "
+        />
         <label>Confirm your password</label>
+        <div
+          *ngIf="confirmPassword.invalid && confirmPassword.touched"
+          class="error-message"
+        >
+          Confirm password is required.
+        </div>
+        <div
+          *ngIf="
+            user.password !== user.confirmPassword && confirmPassword.touched
+          "
+          class="error-message"
+        >
+          Passwords must match.
+        </div>
       </div>
 
       <div class="terms">
         <label for="terms">
-          <input type="checkbox" id="terms" required />
+          <input
+            type="checkbox"
+            id="terms"
+            [(ngModel)]="user.agree"
+            name="terms"
+            required
+          />
           <p>I agree to the <a href="#">Terms and Conditions</a></p>
         </label>
+        <div *ngIf="!user.agree && signUpForm.touched" class="error-message">
+          You must agree to the terms and conditions.
+        </div>
       </div>
 
-      <button type="submit">Sign Up</button>
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+
+      <button type="submit" [disabled]="!signUpForm.form.valid">Sign Up</button>
 
       <div class="login">
         <p>Already have an account? <a href="/signIn">Log In</a></p>

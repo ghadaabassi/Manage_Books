@@ -1,0 +1,29 @@
+.container {
+  max-width: 600px;
+  margin: auto;
+}
+
+.question-box {
+  margin-top: 20px;
+}
+
+.timer {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: red;
+}
+
+.score-box {
+  font-size: 1.2rem;
+  margin-top: 10px;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  margin: 5px;
+}
+
+button:hover {
+  background-color: #e0e0e0;
+}

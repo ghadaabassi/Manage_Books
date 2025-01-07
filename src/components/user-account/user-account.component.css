@@ -1,88 +1,172 @@
-* {
-  margin: 0;
-  padding: 0;
+.user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  background-color: #f8f4f0;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  position: relative;
 }
 
-body {
-  background-color: #000;
+.profile-image-container {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
 }
 
-.card {
-  width: 350px;
-  background-color: #efefef;
-  border: none;
-  cursor: pointer;
-  transition: all 0.5s;
+.profile-img {
+  width: 130px;
+  height: 130px;
+  object-fit: cover;
+  border: 5px solid #704e2d;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.image img {
-  transition: all 0.5s;
+.profile-img:hover {
+  transform: scale(1.1);
+  box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.2);
 }
 
-.card:hover .image img {
-  transform: scale(1.5);
+.profile-details {
+  width: 100%;
 }
 
-.btn {
-  height: 140px;
-  width: 140px;
-  border-radius: 50%;
-}
-
-.name {
-  font-size: 22px;
-  font-weight: bold;
-}
-
-.idd {
-  font-size: 14px;
+h2 {
+  font-size: 28px;
   font-weight: 600;
+  color: #5a4e3c;
 }
 
-.idd1 {
-  font-size: 12px;
+p {
+  color: #777;
+  font-size: 16px;
+  margin-top: 5px;
 }
 
-.number {
-  font-size: 22px;
+.user-credentials {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.credentials-label {
+  font-weight: 600;
+  color: #5a4e3c;
+  margin-right: 10px;
+}
+
+.credentials-value {
+  color: #777;
+  font-size: 16px;
+}
+
+.action-buttons {
+  margin-top: 20px;
+}
+
+button {
+  padding: 12px 25px;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+button:disabled {
+  opacity: 0.5;
+}
+
+.premium-section {
+  text-align: center;
+}
+
+.premium-badge {
+  background-color: #704e2d; /* Dark brown for the badge */
+  color: #fff;
   font-weight: bold;
+  font-size: 16px;
+  padding: 10px 20px;
+  border-radius: 25px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.follow {
-  font-size: 12px;
-  font-weight: 500;
-  color: #444444;
+.credits {
+  font-size: 18px;
+  color: #704e2d;
+  margin-top: 10px;
 }
 
-.btn1 {
-  height: 40px;
-  width: 150px;
-  border: none;
-  background-color: #000;
-  color: #aeaeae;
-  font-size: 15px;
+a.btn {
+  background-color: #704e2d;
+  color: #fff;
+  font-weight: 600;
+  padding: 12px 25px;
+  border-radius: 25px;
+  text-decoration: none;
 }
 
-.text span {
-  font-size: 13px;
-  color: #545454;
-  font-weight: 500;
+a.btn:hover {
+  background-color: #5a4020;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.icons i {
-  font-size: 19px;
+.d-flex {
+  display: flex;
 }
 
-hr .new1 {
-  border: 1px solid;
+.justify-content-center {
+  justify-content: center;
 }
 
-.join {
-  font-size: 14px;
-  color: #a0a0a0;
-  font-weight: bold;
+.gap-4 {
+  gap: 16px;
 }
 
-.date {
-  background-color: #ccc;
+.mt-4 {
+  margin-top: 40px;
+}
+
+.mt-3 {
+  margin-top: 20px;
+}
+
+.ms-md-4 {
+  margin-left: 30px;
+}
+
+.mb-3 {
+  margin-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+  .user-info {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .profile-details {
+    text-align: left;
+    padding-left: 30px;
+  }
+}
+
+.editbtn {
+  border: solid black 1px;
+  background-color: transparent;
+  color: #000;
+}
+
+.editbtn:hover {
+  background-color: black;
+  color: white;
 }

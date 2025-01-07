@@ -10,13 +10,25 @@ import { NotfoundComponent } from '../components/notfound/notfound.component';
 import { UserAccountComponent } from '../components/user-account/user-account.component';
 import { MapComponent } from '../components/map/map.component';
 import { BookCollectionComponent } from '../components/book-collection/book-collection.component';
+import { PuzzleComponent } from '../components/puzzle/puzzle.component';
+
 import { roleGuard } from '../guards/role.guard';
 import { BookManagementComponent } from '../components/admin/book-management/book-management.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'model', component: ThreeDModelComponent },
-  { path: 'collection', component: BookCollectionComponent },
+  {
+    path: 'model',
+    component: ThreeDModelComponent,
+  },
+  {
+    path: 'collection',
+    component: BookCollectionComponent,
+    canActivate: [roleGuard],
+    data: { role: 'AuthenticatedUser' },
+  },
+  { path: 'quiz', component: PuzzleComponent },
+
   {
     path: 'free',
     component: FreeBooksComponent,
@@ -27,7 +39,7 @@ export const routes: Routes = [
     path: 'recommender',
     component: BookRecommenderComponent,
     canActivate: [roleGuard],
-    data: { role: 'Reader' },
+    data: { role: 'AuthenticatedUser' },
   },
   { path: 'aboutUs', component: AboutUsComponent },
   { path: 'signIn', component: SignInComponent },
@@ -36,7 +48,7 @@ export const routes: Routes = [
     path: 'account',
     component: UserAccountComponent,
     canActivate: [roleGuard],
-    data: { role: 'Reader' },
+    data: { role: 'AuthenticatedUser' },
   },
   { path: 'map', component: MapComponent },
   {path:'book-management',component:BookManagementComponent},
