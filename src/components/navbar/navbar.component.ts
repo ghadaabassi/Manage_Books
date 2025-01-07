@@ -26,6 +26,7 @@ export class NavbarComponent {
       await this.authService.signOut();
       console.log('User signed out successfully');
       localStorage.removeItem('userRoles');
+      localStorage.removeItem('userScore');
       this.router.navigate(['/signIn']).then(() => {
         window.location.reload();
       });

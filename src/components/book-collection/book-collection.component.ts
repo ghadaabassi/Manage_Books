@@ -1,15 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-book-collection',
-  imports: [CommonModule, FormsModule],
   templateUrl: './book-collection.component.html',
-  styleUrl: './book-collection.component.css',
+  styleUrls: ['./book-collection.component.css'],
+  imports: [CommonModule, FormsModule],
 })
-export class BookCollectionComponent {
+export class BookCollectionComponent implements OnInit {
   query: string = '';
   books: any[] = [];
   defaultBooks: any[] = [];
